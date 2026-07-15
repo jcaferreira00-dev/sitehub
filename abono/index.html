@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendário PIS/Pasep 2026 — Quando cai e quanto recebo</title>
+<meta name="description" content="Calculadora e calendário do Abono Salarial PIS/Pasep 2026: veja a data do seu lote, o valor estimado e o prazo final de saque. Sem cadastro, sem login.">
+<meta name="theme-color" content="#0B2B22">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="dark">
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="brand-mark">R$</span> Abono 2026</div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro e escuro">Claro</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <p class="eyebrow">PIS · Pasep · Abono Salarial</p>
+    <h1>Quando cai o seu PIS/Pasep 2026?</h1>
+    <p class="lead">Calendário oficial, calculadora de valor e prazo de saque — tudo calculado aqui no seu navegador. Nada do que você digitar é enviado ou guardado.</p>
+
+    <div class="status-card">
+      <div class="status-label" id="statusLabel">Hoje</div>
+      <div class="status-value" id="statusValue">Carregando…</div>
+      <div class="status-sub" id="statusSub"></div>
+      <a class="status-source-link" href="https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/itens-para-verificar/uncategorised/consulta-abono-salarial" target="_blank" rel="noopener">Conferir na fonte oficial (gov.br) →</a>
+    </div>
+
+    <div class="trilha" aria-label="Linha do tempo dos lotes de pagamento">
+      <div class="trilha-track" id="trilhaTrack"></div>
+    </div>
+  </section>
+
+  <section class="block" id="calculadora">
+    <h2>Calculadora do abono</h2>
+    <p class="section-sub">Informe seu mês de nascimento e quantos meses você trabalhou com carteira assinada em 2024. Antes de calcular, <a href="#elegibilidade">confira se você tem direito</a>.</p>
+    <div class="calc-card">
+      <div class="field">
+        <label for="birthMonth">Mês de nascimento</label>
+        <select id="birthMonth"></select>
+      </div>
+      <div class="field">
+        <label for="monthsWorked">Meses trabalhados em 2024: <span id="monthsWorkedVal">12</span></label>
+        <input type="range" id="monthsWorked" min="1" max="12" value="12" step="1">
+        <div class="range-readout"><span>1 mês</span><span>12 meses</span></div>
+      </div>
+      <div class="calc-result">
+        <div>
+          <div class="value" id="calcValue">R$ 1.621,00</div>
+          <div class="caption">valor estimado do abono</div>
+        </div>
+        <div>
+          <div class="value" id="calcDate" style="font-size:1.1rem;">—</div>
+          <div class="caption">data prevista do seu lote (PIS)</div>
+        </div>
+      </div>
+      <p class="calc-formula" id="calcFormula">Cada mês trabalhado dá direito a 1/12 do salário mínimo vigente.</p>
+    </div>
+  </section>
+
+  <section class="block" id="calendario">
+    <h2>Calendário completo — PIS (nascimento)</h2>
+    <p class="section-sub">Pagamento feito pela Caixa Econômica Federal, sempre no dia 15 de cada mês.</p>
+    <table class="pis-table" id="pisTable">
+      <thead>
+        <tr><th>Nascidos em</th><th>Data do pagamento</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section class="block" id="pasep">
+    <h2>E o Pasep?</h2>
+    <p class="section-sub">Servidores públicos seguem o mesmo calendário de sete lotes (fevereiro a agosto), mas agrupados pelo número final da inscrição, não pelo nascimento — e o pagamento é feito pelo Banco do Brasil.</p>
+    <div class="info-card">
+      <h3>Não sabemos seu final de inscrição com precisão de fonte oficial</h3>
+      <p>Para não te passar uma data errada, confirme o seu lote direto no app Carteira de Trabalho Digital, no Portal Emprega Brasil (gov.br) ou pelo telefone 158 — a lógica de datas é a mesma da tabela do PIS acima.</p>
+    </div>
+  </section>
+
+  <section class="block" id="elegibilidade">
+    <h2>Quem tem direito em 2026</h2>
+    <p class="section-sub">Referente ao ano-base 2024. Os quatro critérios abaixo precisam ser atendidos ao mesmo tempo — falhar em um só já tira o direito ao abono.</p>
+    <ul class="check-list">
+      <li><span class="check-mark">✓</span> Cadastrado no PIS ou Pasep há pelo menos 5 anos</li>
+      <li><span class="check-mark">✓</span> Trabalhou com carteira assinada (ou como servidor público) por no mínimo 30 dias em 2024</li>
+      <li><span class="check-mark">✓</span> Remuneração média mensal de até R$ 2.765,93 em 2024 (2 salários mínimos)</li>
+      <li><span class="check-mark">✓</span> Dados corretamente informados pelo empregador no eSocial ou na RAIS</li>
+    </ul>
+
+    <h3 class="subsection-title">De onde vem o valor</h3>
+    <p class="section-sub">O abono nunca é o salário mínimo cheio, a não ser que você tenha trabalhado o ano inteiro. A conta é simples: <strong>1/12 do salário mínimo por mês trabalhado</strong>, arredondando pra cima qualquer fração igual ou maior que 15 dias.</p>
+    <table class="pis-table">
+      <thead><tr><th>Meses trabalhados em 2024</th><th>Cálculo</th><th>Valor</th></tr></thead>
+      <tbody>
+        <tr><td>1 mês</td><td class="date">1/12 × R$ 1.621</td><td class="date">R$ 135,08</td></tr>
+        <tr><td>3 meses</td><td class="date">3/12 × R$ 1.621</td><td class="date">R$ 405,25</td></tr>
+        <tr><td>6 meses</td><td class="date">6/12 × R$ 1.621</td><td class="date">R$ 810,50</td></tr>
+        <tr><td>12 meses</td><td class="date">12/12 × R$ 1.621</td><td class="date">R$ 1.621,00</td></tr>
+      </tbody>
+    </table>
+    <p class="section-sub" style="margin-top:12px;">Trabalhou 22 dias em um mês? Conta como mês completo, porque passou de 15 dias. Trabalhou só 10 dias nesse mês? Esse mês não entra na conta.</p>
+  </section>
+
+  <section class="block" id="sacar">
+    <h2>Como consultar e sacar</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>1. Consultar se tem direito</h3>
+        <p>App Carteira de Trabalho Digital → área Benefícios → Abono Salarial. Também dá pra consultar pelo Portal Emprega Brasil (gov.br) ou telefone 158.</p>
+      </div>
+      <div class="info-card">
+        <h3>2. Receber — PIS (Caixa)</h3>
+        <p>Crédito automático se você já é correntista. Sem conta, o valor vai para a Poupança Social Digital, movimentada pelo app Caixa Tem. Também dá pra sacar em agências, lotéricas e caixas eletrônicos.</p>
+      </div>
+      <div class="info-card">
+        <h3>3. Receber — Pasep (Banco do Brasil)</h3>
+        <p>Crédito em conta para correntistas, ou transferência via Pix (chave CPF) e TED. Quem não é cliente saca presencialmente com documento oficial com foto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="prazo">
+    <h2>Prazo final de saque</h2>
+    <div class="deadline-banner">
+      <div>
+        <div class="label">Não sacado até</div>
+        <div class="days">30 de dezembro de 2026</div>
+      </div>
+      <div id="daysLeft" style="font-family: var(--font-mono); font-size: 0.85rem;"></div>
+    </div>
+    <p class="section-sub" style="margin-top:14px;">Fontes oficiais divergem entre 29 e 30/12 como último dia útil bancário do ano — confirme a data exata perto do prazo pelos canais oficiais. Depois disso, o valor não sacado volta para o Fundo de Amparo ao Trabalhador (FAT), mas ainda pode ser resgatado em até 5 anos.</p>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>Perguntas frequentes</h2>
+
+    <details class="faq-item">
+      <summary>Perdi o prazo de um ano anterior, ainda posso sacar?</summary>
+      <p>Sim. Quem não sacou dentro do calendário do ano tem até 5 anos para resgatar o valor, inclusive por meio de dependentes legais em caso de falecimento do titular.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Posso receber PIS e Pasep no mesmo ano?</summary>
+      <p>Não. Você recebe apenas um dos dois, de acordo com o vínculo predominante no ano-base: quem trabalhou na iniciativa privada recebe o PIS; quem atuou como servidor público recebe o Pasep.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>O sistema mostra "não habilitado". O que fazer?</summary>
+      <p>Geralmente é problema de dados enviados pelo empregador no eSocial/RAIS. Confirme com o RH se a informação foi enviada corretamente e acompanhe a atualização pelos canais oficiais — a correção pode levar alguns dias para refletir no aplicativo.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>PIS/Pasep é a mesma coisa que o FGTS?</summary>
+      <p>Não. São benefícios diferentes. As antigas cotas do Fundo PIS/Pasep foram extintas e incorporadas ao FGTS em 2020 — o abono salarial anual é um benefício separado, pago todo ano a quem se enquadra nos critérios.</p>
+    </details>
+  </section>
+
+ </main>
+
+<footer class="wrap">
+  <p>Fontes: calendário e regras oficiais aprovados pelo Codefat/Ministério do Trabalho e Emprego. Valores e datas conferidos em julho de 2026 — confirme sempre no app Carteira de Trabalho Digital ou pelo telefone 158 antes de tomar decisões com base neles.</p>
+  <div class="privacy-note">
+    <span>🔒</span>
+    <span>Esta página não usa login, não coleta e não armazena nenhuma informação que você digitar aqui. Todo o cálculo acontece localmente no seu navegador. Leia a <a href="privacy.html">Política de Privacidade completa</a>.</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
