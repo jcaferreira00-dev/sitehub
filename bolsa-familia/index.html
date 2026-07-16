@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2E6FF2">
+<title>Bolsa Família 2026 — Veja se você tem direito | Tem Direito?</title>
+<meta name="description" content="Calculadora gratuita de elegibilidade ao Bolsa Família 2026: renda per capita, regra de proteção e valor estimado.">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back-link" href="/">← Tem Direito?</a>
+    <div class="logo-mark">Bolsa Família</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Consulta gratuita</span>
+    <h1>Você tem direito ao Bolsa Família?</h1>
+    <p>Preencha os dados da sua família e descubra se você se encaixa nas regras de 2026 e qual valor pode receber.</p>
+  </section>
+
+  <section class="calc-card" id="calc">
+    <h2>Calculadora de elegibilidade</h2>
+    <div class="calc-sub">É só uma estimativa — a confirmação oficial é sempre feita pelo CadÚnico.</div>
+
+    <div class="field">
+      <label for="renda">Renda total da família (R$/mês)</label>
+      <input type="number" id="renda" inputmode="decimal" placeholder="Ex: 1200">
+    </div>
+    <div class="field-row two">
+      <div class="field">
+        <label for="pessoas">Nº de pessoas na família</label>
+        <input type="number" id="pessoas" inputmode="numeric" placeholder="Ex: 4">
+      </div>
+      <div class="field">
+        <label for="criancas06">Crianças de 0 a 6 anos</label>
+        <input type="number" id="criancas06" inputmode="numeric" placeholder="0">
+      </div>
+    </div>
+    <div class="field">
+      <label for="outros">Crianças/adolescentes de 7 a 18, gestantes ou nutrizes</label>
+      <input type="number" id="outros" inputmode="numeric" placeholder="0">
+    </div>
+
+    <button class="btn" onclick="calcular()">Calcular</button>
+
+    <div class="result" id="resultado">
+      <div class="r-label" id="r-label">Resultado</div>
+      <div class="r-value" id="r-value">—</div>
+      <div class="r-note" id="r-note"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Quem tem direito</h2>
+    <p>Pra ser elegível ao Bolsa Família em 2026, sua família precisa estar inscrita e com dados atualizados no CadÚnico, e a renda mensal por pessoa não pode ultrapassar o limite estabelecido.</p>
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="n">Linha de elegibilidade</div>
+        <p>Renda per capita de até <strong>R$ 218/mês</strong> garante o benefício integral.</p>
+      </div>
+      <div class="info-item">
+        <div class="n">Regra de proteção</div>
+        <p>Renda per capita entre R$ 218 e <strong>R$ 706</strong> pode manter 50% do valor por um período.</p>
+      </div>
+      <div class="info-item">
+        <div class="n">Valor base</div>
+        <p><strong>R$ 600</strong> por família, mais adicionais por criança, adolescente ou gestante.</p>
+      </div>
+      <div class="info-item">
+        <div class="n">Cadastro</div>
+        <p>Inscrição no <strong>CadÚnico</strong>, feita no CRAS do seu município, com dados atualizados nos últimos 2 anos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Como funciona o pagamento</h2>
+    <p>O calendário segue o último dígito do seu NIS (Número de Identificação Social), com pagamentos nos últimos 10 dias úteis de cada mês — dezembro é antecipado, por volta do dia 10. O valor fica disponível na conta Caixa Tem.</p>
+  </section>
+
+  <section class="section">
+    <h2>Perguntas frequentes</h2>
+    <details>
+      <summary>Preciso fazer alguma coisa pra continuar recebendo?</summary>
+      <p>Sim — sua família precisa manter o Cadastro Único atualizado e cumprir as condicionalidades de saúde e educação, como frequência escolar e vacinação em dia.</p>
+    </details>
+    <details>
+      <summary>E se minha renda aumentar um pouco?</summary>
+      <p>Existe a Regra de Proteção: se a renda por pessoa ficar entre R$ 218 e R$ 706, a família continua recebendo 50% do valor por um tempo, em vez de perder o benefício de uma vez.</p>
+    </details>
+    <details>
+      <summary>Onde eu me inscrevo?</summary>
+      <p>No CRAS (Centro de Referência de Assistência Social) mais próximo da sua casa, levando os documentos de todos os membros da família.</p>
+    </details>
+    <details>
+      <summary>Como confirmo se já estou recebendo?</summary>
+      <p>Pelo aplicativo Bolsa Família, pelo app Caixa Tem, ou pela Central 121 do Ministério do Desenvolvimento Social.</p>
+    </details>
+
+    <div class="disclaimer">
+      <strong>Aviso:</strong> esta calculadora é uma estimativa educativa baseada nas regras públicas de 2026. Os valores reais podem variar. Confirme sempre no CadÚnico ou no app oficial Bolsa Família.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Parte do <a href="/">Tem Direito?</a> · <a href="privacy.html">Política de Privacidade</a></p>
+    <p>© 2026 · consultarbeneficios.com.br</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

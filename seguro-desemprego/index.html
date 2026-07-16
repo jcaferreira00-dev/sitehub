@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0891B2">
+<title>Seguro-Desemprego 2026 — Calculadora de valor e parcelas | Tem Direito?</title>
+<meta name="description" content="Calcule o valor da parcela e quantos meses de seguro-desemprego você tem direito em 2026.">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back-link" href="/">← Tem Direito?</a>
+    <div class="logo-mark">Seguro-Desemprego</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Consulta gratuita</span>
+    <h1>Quanto e por quanto tempo você recebe?</h1>
+    <p>Calcule o valor estimado da parcela e quantos meses de seguro-desemprego você tem direito em 2026.</p>
+  </section>
+
+  <section class="calc-card" id="calc">
+    <h2>Calculadora do Seguro-Desemprego</h2>
+    <div class="calc-sub">Use a média dos seus 3 últimos salários antes da demissão.</div>
+
+    <div class="field">
+      <label for="media">Média salarial dos últimos 3 meses (R$)</label>
+      <input type="number" id="media" inputmode="decimal" placeholder="Ex: 2400">
+    </div>
+    <div class="field-row two">
+      <div class="field">
+        <label for="meses">Meses trabalhados no período</label>
+        <input type="number" id="meses" inputmode="numeric" placeholder="Ex: 18">
+      </div>
+      <div class="field">
+        <label for="vezes">Quantas vezes já pediu o benefício</label>
+        <select id="vezes">
+          <option value="1">Primeira vez</option>
+          <option value="2">Segunda vez</option>
+          <option value="3">Terceira vez ou mais</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" onclick="calcular()">Calcular</button>
+
+    <div class="result" id="resultado">
+      <div class="r-label" id="r-label">Resultado</div>
+      <div class="r-value" id="r-value">—</div>
+      <div class="r-note" id="r-note"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Como o valor é calculado</h2>
+    <div class="info-grid">
+      <div class="info-item"><div class="n">Até R$ 2.222,17</div><p>Parcela = 80% da média salarial</p></div>
+      <div class="info-item"><div class="n">R$ 2.222,18 a R$ 3.703,99</div><p>R$ 1.777,74 + 50% do que exceder R$ 2.222,17</p></div>
+      <div class="info-item"><div class="n">Acima de R$ 3.704,00</div><p>Parcela fixa de R$ 2.518,65 (teto)</p></div>
+      <div class="info-item"><div class="n">Piso</div><p>Nenhuma parcela fica abaixo de R$ 1.621,00 (salário mínimo)</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Quantas parcelas você recebe</h2>
+    <p>Depende de quantas vezes você já pediu o benefício e de quanto tempo trabalhou antes da demissão:</p>
+    <div class="info-grid">
+      <div class="info-item"><div class="n">1ª solicitação</div><p>12 a 23 meses → 4 parcelas · 24+ meses → 5 parcelas</p></div>
+      <div class="info-item"><div class="n">2ª solicitação</div><p>9 a 11 meses → 3 · 12 a 23 → 4 · 24+ → 5 parcelas</p></div>
+      <div class="info-item"><div class="n">3ª solicitação ou mais</div><p>6 a 11 meses → 3 · 12 a 23 → 4 · 24+ → 5 parcelas</p></div>
+      <div class="info-item"><div class="n">Prazo pra pedir</div><p>Entre o 7º e o 120º dia após a demissão</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Perguntas frequentes</h2>
+    <details>
+      <summary>Quem tem direito?</summary>
+      <p>Quem foi demitido sem justa causa, está desempregado no momento do pedido e cumpre o tempo mínimo de trabalho exigido.</p>
+    </details>
+    <details>
+      <summary>Posso trabalhar informalmente enquanto recebo?</summary>
+      <p>Não. Qualquer atividade remunerada durante o recebimento é proibida e pode ser considerada fraude.</p>
+    </details>
+    <details>
+      <summary>Como eu peço o benefício?</summary>
+      <p>Pelo aplicativo Carteira de Trabalho Digital, pelo portal gov.br, ou presencialmente numa unidade do SINE.</p>
+    </details>
+    <details>
+      <summary>Pedi demissão, tenho direito?</summary>
+      <p>Não — o benefício é exclusivo pra demissão sem justa causa ou demissão indireta.</p>
+    </details>
+
+    <div class="disclaimer">
+      <strong>Aviso:</strong> cálculo estimado com base na tabela oficial do MTE vigente desde 11/01/2026. O valor final depende da análise do seu caso pelo Ministério do Trabalho.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Parte do <a href="/">Tem Direito?</a> · <a href="privacy.html">Política de Privacidade</a></p>
+    <p>© 2026 · consultarbeneficios.com.br</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

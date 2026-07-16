@@ -308,7 +308,7 @@
     color: var(--ink-soft);
   }
 
-  /* ---------- EM BREVE GRID ---------- */
+  /* ---------- BENEFÍCIOS GRID ---------- */
   .grid{
     display:grid;
     grid-template-columns: 1fr;
@@ -318,38 +318,57 @@
     .grid{ grid-template-columns: 1fr 1fr; }
   }
 
-  .card-soon{
-    border: 1.5px dashed var(--muted-border);
-    background: var(--muted-bg);
+  .card-live{
+    border: 1px solid var(--muted-border);
+    background: var(--white);
     border-radius: var(--radius);
     padding: 22px;
     position: relative;
+    text-decoration: none;
+    display: block;
+    border-top: 4px solid var(--card-accent, var(--teal));
+    box-shadow: var(--shadow);
+    transition: transform .18s ease, box-shadow .18s ease;
   }
-  .badge-soon{
-    display:inline-block;
+  .card-live:hover{ transform: translateY(-3px); }
+  .card-live:focus-visible{ outline: 3px solid var(--card-accent, var(--teal)); outline-offset: 2px; }
+  .badge-live{
+    display:inline-flex;
+    align-items:center;
+    gap: 6px;
     font-size: 0.72rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--teal-dark);
-    background: rgba(14,107,92,0.1);
+    color: var(--card-accent, var(--teal));
+    background: color-mix(in srgb, var(--card-accent, var(--teal)) 12%, white);
     padding: 4px 10px;
     border-radius: 100px;
     margin-bottom: 12px;
   }
-  .card-soon h3{
+  .badge-live .dot{
+    width:6px; height:6px; border-radius:50%;
+    background: var(--card-accent, var(--teal));
+  }
+  .card-live h3{
     font-size: 1.12rem;
     color: var(--ink);
   }
-  .card-soon p{
+  .card-live p{
     margin-top: 8px;
     font-size: 0.94rem;
     color: var(--ink-soft);
   }
-  .card-soon .icon{
+  .card-live .icon{
     width: 38px; height: 38px;
-    color: var(--teal);
+    color: var(--card-accent, var(--teal));
     margin-bottom: 14px;
+  }
+  .card-live .go{
+    margin-top: 14px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--card-accent, var(--teal));
   }
 
   /* ---------- FERRAMENTAS (quieter) ---------- */
@@ -468,38 +487,42 @@
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <h2>Mais direitos a caminho</h2>
-      <p>Estamos preparando consultas simples para outros benefícios que quase ninguém entende direito.</p>
+      <h2>Mais benefícios pra consultar</h2>
+      <p>Calculadoras gratuitas pra outros benefícios que quase ninguém entende direito.</p>
     </div>
 
     <div class="grid">
-      <div class="card-soon">
+      <a class="card-live" href="/bolsa-familia/" style="--card-accent:#2E6FF2">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <span class="badge-soon">Em breve</span>
+        <span class="badge-live"><span class="dot"></span> Disponível</span>
         <h3>Bolsa Família</h3>
-        <p>Veja se sua família tem direito ao benefício, o calendário de parcelas e como consultar.</p>
-      </div>
+        <p>Veja se sua família tem direito ao benefício e qual valor pode receber.</p>
+        <div class="go">Consultar →</div>
+      </a>
 
-      <div class="card-soon">
+      <a class="card-live" href="/fgts/" style="--card-accent:#7C3AED">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
-        <span class="badge-soon">Em breve</span>
+        <span class="badge-live"><span class="dot"></span> Disponível</span>
         <h3>FGTS</h3>
-        <p>Saque-aniversário, saldo e saques emergenciais explicados sem economês.</p>
-      </div>
+        <p>Saque-aniversário: calcule o valor sacável e sua janela pelo mês de nascimento.</p>
+        <div class="go">Consultar →</div>
+      </a>
 
-      <div class="card-soon">
+      <a class="card-live" href="/seguro-desemprego/" style="--card-accent:#0891B2">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        <span class="badge-soon">Em breve</span>
+        <span class="badge-live"><span class="dot"></span> Disponível</span>
         <h3>Seguro-Desemprego</h3>
         <p>Quanto você recebe, por quanto tempo, e como não perder o prazo de pedir.</p>
-      </div>
+        <div class="go">Consultar →</div>
+      </a>
 
-      <div class="card-soon">
+      <a class="card-live" href="/abono-permanencia/" style="--card-accent:#DB2777">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-4.06-6.97"/><path d="M20 5v4h-4"/></svg>
-        <span class="badge-soon">Em breve</span>
+        <span class="badge-live"><span class="dot"></span> Disponível</span>
         <h3>Abono de Permanência</h3>
-        <p>Para quem já pode se aposentar mas decidiu continuar trabalhando.</p>
-      </div>
+        <p>Para servidores públicos que já podem se aposentar mas decidiram continuar.</p>
+        <div class="go">Consultar →</div>
+      </a>
     </div>
   </div>
 </section>

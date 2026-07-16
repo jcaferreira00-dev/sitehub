@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#DB2777">
+<title>Abono de Permanência 2026 — Veja se você tem direito | Tem Direito?</title>
+<meta name="description" content="Check de elegibilidade ao Abono de Permanência para servidores públicos (RPPS) em 2026.">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back-link" href="/">← Tem Direito?</a>
+    <div class="logo-mark">Abono de Permanência</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Só pra servidores públicos</span>
+    <h1>Você pode ter direito ao Abono de Permanência?</h1>
+    <p>Esse benefício é exclusivo pra servidores públicos efetivos vinculados a um regime próprio de previdência (RPPS). Responda as perguntas abaixo pra ver se o seu caso se encaixa.</p>
+  </section>
+
+  <section class="calc-card" id="calc">
+    <h2>Check rápido de elegibilidade</h2>
+    <div class="calc-sub">Marque o que se aplica ao seu caso.</div>
+
+    <div class="checklist">
+      <label><input type="checkbox" id="q1"> Sou servidor público efetivo (concursado), não sou CLT</label>
+      <label><input type="checkbox" id="q2"> Contribuo pelo RPPS (regime próprio do meu órgão), não pelo INSS</label>
+      <label><input type="checkbox" id="q3"> Já cumpri todos os requisitos pra me aposentar voluntariamente (idade, tempo de contribuição, tempo no serviço público e no cargo)</label>
+      <label><input type="checkbox" id="q4"> Quero continuar trabalhando em vez de me aposentar agora</label>
+    </div>
+
+    <button class="btn" onclick="verificar()">Verificar</button>
+
+    <div class="result" id="resultado">
+      <div class="r-label" id="r-label">Resultado</div>
+      <div class="r-value" id="r-value">—</div>
+      <div class="r-note" id="r-note"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>O que é</h2>
+    <p>O Abono de Permanência devolve, todo mês, o valor que seria descontado da sua contribuição previdenciária — na prática, um aumento líquido no seu salário, sem deixar de contribuir pra aposentadoria.</p>
+    <div class="info-grid">
+      <div class="info-item"><div class="n">Quem tem direito</div><p>Servidor público efetivo (RPPS) que já pode se aposentar mas opta por continuar na ativa.</p></div>
+      <div class="info-item"><div class="n">Valor</div><p>Equivalente à sua alíquota de contribuição previdenciária (normalmente entre 11% e 14% do salário, varia por regime).</p></div>
+      <div class="info-item"><div class="n">Quem NÃO tem direito</div><p>Trabalhadores CLT do regime geral (INSS) não têm esse benefício — a regra é exclusiva do serviço público.</p></div>
+      <div class="info-item"><div class="n">Regras variam</div><p>Cada ente (União, estado, município) pode ter critérios próprios. Confirme com o RH do seu órgão.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Como solicitar</h2>
+    <p>O pedido é feito junto ao setor de recursos humanos ou ao instituto de previdência do seu órgão (RPPS), apresentando a documentação de tempo de contribuição. Se você já cumpria os requisitos há mais tempo e não pediu, pode ter direito a valores retroativos, respeitado o prazo de prescrição de 5 anos.</p>
+  </section>
+
+  <section class="section">
+    <h2>Perguntas frequentes</h2>
+    <details>
+      <summary>Sou CLT, tenho algum direito parecido?</summary>
+      <p>Não existe uma versão do Abono de Permanência pro regime geral (INSS). Trabalhadores CLT não têm esse benefício específico.</p>
+    </details>
+    <details>
+      <summary>Recebendo o abono, posso me aposentar depois?</summary>
+      <p>Sim, a qualquer momento. Receber o abono não tira nem atrasa seu direito de se aposentar quando quiser.</p>
+    </details>
+    <details>
+      <summary>O abono entra no cálculo da aposentadoria?</summary>
+      <p>Não, ele é pago só enquanto você está na ativa e não é incorporado ao valor da futura aposentadoria.</p>
+    </details>
+    <details>
+      <summary>Como sei se já cumpri os requisitos?</summary>
+      <p>Solicite ao seu RH ou RPPS uma contagem/mapa do seu tempo de contribuição — é o documento oficial que confirma se você já tem direito.</p>
+    </details>
+
+    <div class="disclaimer">
+      <strong>Aviso:</strong> este é um conteúdo informativo, não uma análise jurídica do seu caso. As regras de aposentadoria do servidor público têm várias exceções e mudaram bastante com a Reforma da Previdência (EC 103/2019). Confirme sempre com o RH do seu órgão ou um especialista em direito previdenciário.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Parte do <a href="/">Tem Direito?</a> · <a href="privacy.html">Política de Privacidade</a></p>
+    <p>© 2026 · consultarbeneficios.com.br</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

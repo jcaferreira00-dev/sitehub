@@ -1,0 +1,21 @@
+{
+  "name": "Abono de Permanência — Tem Direito?",
+  "short_name": "Abono Permanência",
+  "start_url": "/abono-permanencia/index.html",
+  "scope": "/abono-permanencia/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#DB2777",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
