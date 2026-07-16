@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D97706">
+<title>Tarifa Social de Energia 2026 — Veja seu desconto | Tem Direito?</title>
+<meta name="description" content="Descubra se você tem direito a desconto ou isenção na conta de luz pela Tarifa Social de Energia Elétrica 2026.">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back-link" href="/">← Tem Direito?</a>
+    <div class="logo-mark">Tarifa Social de Energia</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Consulta gratuita</span>
+    <h1>Sua conta de luz pode sair mais barata (ou zerada)</h1>
+    <p>Veja se você se encaixa na Tarifa Social de Energia e quanto pode economizar todo mês na conta.</p>
+  </section>
+
+  <section class="calc-card" id="calc">
+    <h2>Check de elegibilidade</h2>
+    <div class="calc-sub">Marque o que se aplica ao seu caso.</div>
+
+    <div class="field">
+      <label for="renda">Renda total da família (R$/mês)</label>
+      <input type="number" id="renda" inputmode="decimal" placeholder="Ex: 1200">
+    </div>
+    <div class="field">
+      <label for="pessoas">Nº de pessoas na família</label>
+      <input type="number" id="pessoas" inputmode="numeric" placeholder="Ex: 4">
+    </div>
+    <div class="checklist">
+      <label><input type="checkbox" id="bpc"> Alguém da família recebe o BPC/LOAS</label>
+      <label><input type="checkbox" id="doente"> Tem pessoa com doença que depende de aparelho elétrico em casa</label>
+    </div>
+
+    <button class="btn" onclick="calcular()">Calcular</button>
+
+    <div class="result" id="resultado">
+      <div class="r-label" id="r-label">Resultado</div>
+      <div class="r-value" id="r-value">—</div>
+      <div class="r-note" id="r-note"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Como funciona o desconto</h2>
+    <div class="info-grid">
+      <div class="info-item"><div class="n">Isenção total</div><p>100% de desconto até 80 kWh/mês pra quem tem renda per capita até meio salário mínimo, recebe BPC, ou tem morador dependente de aparelho elétrico (renda até 3 salários mínimos).</p></div>
+      <div class="info-item"><div class="n">Desconto Social (novo)</div><p>Tarifa reduzida até 120 kWh/mês pra família com renda per capita entre meio e um salário mínimo, com isenção de parte das taxas.</p></div>
+      <div class="info-item"><div class="n">Indígenas e quilombolas</div><p>Desconto de até 100% até 50 kWh/mês, independente da renda, se inscritos no CadÚnico.</p></div>
+      <div class="info-item"><div class="n">Acima do limite</div><p>O consumo que passar da faixa de kWh do seu grupo é cobrado no valor cheio.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Como ativar</h2>
+    <p>Na maioria dos casos, o desconto é aplicado automaticamente ao CadÚnico. Se não aparecer na sua conta, entre em contato com a distribuidora de energia da sua região levando o número do NIS.</p>
+  </section>
+
+  <section class="section">
+    <h2>Perguntas frequentes</h2>
+    <details>
+      <summary>Preciso pedir em algum lugar?</summary>
+      <p>Normalmente não — o cruzamento com o CadÚnico é automático. Mas vale conferir sua fatura e, se não estiver aplicado, contatar a distribuidora.</p>
+    </details>
+    <details>
+      <summary>O desconto vale pra qualquer imóvel?</summary>
+      <p>Não, só pra uma unidade consumidora por família, usada como moradia principal.</p>
+    </details>
+    <details>
+      <summary>Perco o desconto se eu não atualizar o CadÚnico?</summary>
+      <p>Sim. O cadastro precisa estar atualizado (no máximo 2 anos) pra manter o benefício ativo.</p>
+    </details>
+
+    <div class="disclaimer">
+      <strong>Aviso:</strong> regras baseadas na Lei 15.235/2025 ("Luz do Povo") e mudanças vigentes desde janeiro de 2026. Confirme sua situação com sua distribuidora de energia.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Parte do <a href="/">Tem Direito?</a> · <a href="privacy.html">Política de Privacidade</a></p>
+    <p>© 2026 · consultarbeneficios.com.br</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

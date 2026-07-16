@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4338CA">
+<title>BPC/LOAS 2026 — Calculadora de elegibilidade | Tem Direito?</title>
+<meta name="description" content="Veja se você ou um familiar idoso ou com deficiência tem direito a 1 salário mínimo por mês pelo BPC/LOAS.">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back-link" href="/">← Tem Direito?</a>
+    <div class="logo-mark">BPC/LOAS</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Consulta gratuita</span>
+    <h1>Você ou um familiar pode ter direito a 1 salário mínimo por mês?</h1>
+    <p>O BPC/LOAS paga R$ 1.621 mensais a idosos ou pessoas com deficiência de baixa renda, sem precisar ter contribuído ao INSS.</p>
+  </section>
+
+  <section class="calc-card" id="calc">
+    <h2>Calculadora de elegibilidade</h2>
+    <div class="calc-sub">Baseado nas regras da LOAS vigentes em 2026.</div>
+
+    <div class="checklist">
+      <label><input type="checkbox" id="idoso"> Tenho 65 anos ou mais</label>
+      <label><input type="checkbox" id="pcd"> Sou pessoa com deficiência de longo prazo (2 anos ou mais)</label>
+    </div>
+
+    <div class="field">
+      <label for="renda">Renda total da família (R$/mês)</label>
+      <input type="number" id="renda" inputmode="decimal" placeholder="Ex: 1200">
+    </div>
+    <div class="field">
+      <label for="pessoas">Nº de pessoas na família</label>
+      <input type="number" id="pessoas" inputmode="numeric" placeholder="Ex: 3">
+    </div>
+
+    <button class="btn" onclick="calcular()">Calcular</button>
+
+    <div class="result" id="resultado">
+      <div class="r-label" id="r-label">Resultado</div>
+      <div class="r-value" id="r-value">—</div>
+      <div class="r-note" id="r-note"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Quem tem direito</h2>
+    <div class="info-grid">
+      <div class="info-item"><div class="n">Público</div><p>Idosos de 65 anos+ ou pessoas com deficiência de qualquer idade.</p></div>
+      <div class="info-item"><div class="n">Renda</div><p>Per capita familiar até R$ 405,25 (1/4 do salário mínimo).</p></div>
+      <div class="info-item"><div class="n">Flexibilização</div><p>Até R$ 810,50 per capita, se comprovada vulnerabilidade adicional (gastos com remédios, tratamento etc).</p></div>
+      <div class="info-item"><div class="n">Valor</div><p>1 salário mínimo (R$ 1.621), sem 13º salário.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Como pedir</h2>
+    <p>O pedido é feito pelo aplicativo ou site <strong>Meu INSS</strong>, ou pelo telefone 135. É preciso estar inscrito no CadÚnico e, no caso de pessoa com deficiência, passar por uma avaliação médica e social do INSS.</p>
+  </section>
+
+  <section class="section">
+    <h2>Perguntas frequentes</h2>
+    <details>
+      <summary>O BPC conta como aposentadoria?</summary>
+      <p>Não. É um benefício assistencial, não previdenciário — não gera pensão por morte nem 13º salário, e pode ser cancelado se a renda familiar aumentar.</p>
+    </details>
+    <details>
+      <summary>Posso receber BPC e trabalhar?</summary>
+      <p>Idosos não podem. Pessoas com deficiência podem optar pelo Auxílio-Inclusão (50% do valor do BPC) e continuar trabalhando com carteira assinada.</p>
+    </details>
+    <details>
+      <summary>Preciso ter contribuído com o INSS?</summary>
+      <p>Não. O BPC é assistencial — não exige nenhuma contribuição prévia, diferente da aposentadoria.</p>
+    </details>
+    <details>
+      <summary>O que conta como renda da família?</summary>
+      <p>Salários, aposentadorias e a maioria dos rendimentos. Bolsa Família e o BPC de outro idoso da casa não entram nessa conta.</p>
+    </details>
+
+    <div class="disclaimer">
+      <strong>Aviso:</strong> cálculo baseado na Lei 8.742/1993 (LOAS) e nos valores de 2026. A concessão depende de avaliação do INSS — confirme seu caso pelo Meu INSS.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Parte do <a href="/">Tem Direito?</a> · <a href="privacy.html">Política de Privacidade</a></p>
+    <p>© 2026 · consultarbeneficios.com.br</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

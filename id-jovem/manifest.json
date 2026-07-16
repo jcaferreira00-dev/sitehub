@@ -1,0 +1,21 @@
+{
+  "name": "ID Jovem — Tem Direito?",
+  "short_name": "ID Jovem",
+  "start_url": "/id-jovem/index.html",
+  "scope": "/id-jovem/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0D9488",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
