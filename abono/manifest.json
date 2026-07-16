@@ -1,32 +1,21 @@
 {
-  "name": "Abono PIS/Pasep 2026",
-  "short_name": "Abono 2026",
-  "description": "Calendário e calculadora do Abono Salarial PIS/Pasep 2026 — quando cai e quanto você recebe.",
+  "name": "Abono PIS/Pasep 2026 — Tem Direito?",
+  "short_name": "Abono PIS/Pasep",
   "start_url": "/abono/index.html",
   "scope": "/abono/",
   "display": "standalone",
-  "background_color": "#0B2B22",
-  "theme_color": "#0B2B22",
-  "orientation": "portrait",
-  "lang": "pt-BR",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FF7A3D",
   "icons": [
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icons/icon-512-maskable.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     }
   ]
 }
