@@ -317,6 +317,34 @@
   .modal .btn-block + .btn-block{margin-top:10px;}
   .modal-divider{height:1px;background:var(--line);margin:16px 0;}
 
+  /* login screen */
+  #loginScreen{
+    position:fixed;inset:0;z-index:100;background:var(--green-900);
+    display:none;align-items:center;justify-content:center;padding:20px;
+  }
+  #loginScreen.open{display:flex;}
+  .login-card{
+    background:var(--surface);color:var(--ink);width:100%;max-width:380px;
+    border-radius:18px;padding:26px 22px;box-shadow:var(--shadow);
+  }
+  .login-card .mark{
+    width:48px;height:48px;border-radius:13px;margin:0 auto 14px;
+    background:linear-gradient(155deg,var(--green-500),var(--green-700));
+    display:flex;align-items:center;justify-content:center;
+  }
+  .login-card .mark .material-symbols-outlined{color:#eafff0;font-size:26px;}
+  .login-card h2{font-family:var(--font-display);text-align:center;margin:0 0 4px;font-size:19px;}
+  .login-card p.sub{text-align:center;font-size:12.5px;color:var(--ink-soft);margin:0 0 20px;}
+  .login-error{
+    background:rgba(217,95,95,.12);color:var(--red-600);font-size:12.5px;
+    padding:9px 11px;border-radius:9px;margin-bottom:12px;display:none;
+  }
+  .login-error.show{display:block;}
+  .login-loading{display:none;align-items:center;justify-content:center;height:100%;position:fixed;inset:0;z-index:99;background:var(--green-900);}
+  .login-loading.open{display:flex;}
+  .spinner{width:34px;height:34px;border-radius:50%;border:3px solid rgba(255,255,255,.2);border-top-color:#fff;animation:spin .8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
   @media (min-width:860px){
     body{padding-bottom:0;}
     .tabbar{display:none;}
@@ -340,6 +368,25 @@
 </head>
 <body data-theme="light">
 
+<!-- ================= LOADING (firebase auth check) ================= -->
+<div class="login-loading" id="authLoading"><div class="spinner"></div></div>
+
+<!-- ================= LOGIN SCREEN ================= -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="mark"><span class="material-symbols-outlined">savings</span></div>
+    <h2>Gestão Financeira</h2>
+    <p class="sub">Entre com seu e-mail e senha para sincronizar seus dados</p>
+    <div class="login-error" id="loginError"></div>
+    <form id="loginForm">
+      <div class="field" style="margin-bottom:10px;"><label>E-mail</label><input type="email" id="loginEmail" required autocomplete="email"></div>
+      <div class="field" style="margin-bottom:16px;"><label>Senha</label><input type="password" id="loginPassword" required autocomplete="current-password"></div>
+      <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+      <button type="button" id="btnCriarConta" class="btn btn-ghost btn-block" style="margin-top:9px;">Criar conta</button>
+    </form>
+  </div>
+</div>
+
 <div class="topbar">
   <div class="brand">
     <div class="mark"><span class="material-symbols-outlined">savings</span></div>
@@ -351,6 +398,9 @@
   <div class="top-actions">
     <button class="icon-btn" id="toolsToggle" aria-label="Ferramentas">
       <span class="material-symbols-outlined">build</span>
+    </button>
+    <button class="icon-btn" id="logoutBtn" aria-label="Sair" style="display:none;">
+      <span class="material-symbols-outlined">logout</span>
     </button>
     <button class="icon-btn" id="themeToggle" aria-label="Alternar tema">
       <span class="material-symbols-outlined">dark_mode</span>
@@ -423,7 +473,7 @@
       </div>
 
       <details class="card collapsible" open id="detRenda">
-        <summary><span class="material-symbols-outlined">trending_up</span>Renda<span class="count" id="rendaCount">0</span><span class="material-symbols-outlined chev">expand_more</span></summary>
+        <summary><span class="material-symbols-outlined">trending_up</span>Renda<span class="count" id="rendaCount">0</span><span class="count" id="rendaSum">R$ 0,00</span><span class="material-symbols-outlined chev">expand_more</span></summary>
         <div class="details-body">
           <div id="rendaList"></div>
           <div id="rendaEmpty" class="empty">
@@ -443,7 +493,7 @@
       </details>
 
       <details class="card collapsible" open id="detGastos">
-        <summary><span class="material-symbols-outlined">trending_down</span>Gastos<span class="count" id="gastoCount">0</span><span class="material-symbols-outlined chev">expand_more</span></summary>
+        <summary><span class="material-symbols-outlined">trending_down</span>Gastos<span class="count" id="gastoCount">0</span><span class="count" id="gastoSum">R$ 0,00</span><span class="material-symbols-outlined chev">expand_more</span></summary>
         <div class="details-body">
           <div id="gastoList"></div>
           <div id="gastoEmpty" class="empty">
@@ -566,7 +616,11 @@
 </div>
 
 <script>
-/* ============ Estado / Storage (somente local, sem sincronização em nuvem) ============ */
+/* ============ Sincronização na nuvem (via cloud-sync.js / window.CloudSync) ============ */
+let currentUser = null;
+let fbSaveTimer = null;
+
+/* ============ Estado / Storage ============ */
 const STORAGE_KEY = 'gf_state_v2';
 const MONTHS = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 let isFirstRun = false;
@@ -574,15 +628,37 @@ let isFirstRun = false;
 function loadState(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
-    if(raw) return JSON.parse(raw);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      // Migração: meses salvos por versões antigas do app não tinham o campo
+      // "locked". Marcamos todos como travados para preservar o que já foi
+      // lançado; só os meses novos (ainda não tocados) vão herdar automaticamente.
+      Object.values(parsed.gastos||{}).forEach(mes=>{ if(mes.locked===undefined) mes.locked = true; });
+      return parsed;
+    }
   }catch(e){}
   isFirstRun = true;
   return { gastos:{}, cartoes:[], outras:[], theme:'light' };
 }
 let state = loadState();
 
+// Salva os dados desse app na nuvem SEM apagar campos de outros apps
+// que compartilham o mesmo documento "usuarios/{uid}" (Patrimônio, Controle Financeiro etc.)
+async function pushStateToCloud(){
+  if(!currentUser || !window.CloudSync) return;
+  try{
+    const existing = await window.CloudSync.buscarDaNuvem(currentUser.uid) || {};
+    existing.gestaoFinanceira = state;
+    await window.CloudSync.salvarNaNuvem(currentUser.uid, existing);
+  }catch(e){ console.error('Erro ao salvar na nuvem:', e); }
+}
+
 function save(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  if(currentUser){
+    clearTimeout(fbSaveTimer);
+    fbSaveTimer = setTimeout(pushStateToCloud, 900);
+  }
 }
 
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
@@ -593,19 +669,37 @@ function escapeHtml(s){ const d=document.createElement('div'); d.textContent=s??
 function seedInitialData(){
   const key = monthKey(new Date());
   state.gastos[key] = {
+    locked: true,
     rendas: [
-      {id:uid(), desc:'Exemplo', valor:1616.00},
+      {id:uid(), desc:'Vale dia 15', valor:4314.16},
+      {id:uid(), desc:'Pagamento dia 30', valor:7085.44}
     ],
     despesas: [
-  
-      {id:uid(), desc:'Exemplo', valor:110.73, categoria:'Contas fixas', status:'pendente'},
+      {id:uid(), desc:'Processo', valor:500.00, categoria:'Jurídico', status:'pendente'},
+      {id:uid(), desc:'Água', valor:110.73, categoria:'Contas fixas', status:'pendente'},
+      {id:uid(), desc:'Luz Chácara', valor:63.79, categoria:'Contas fixas', status:'pendente'},
+      {id:uid(), desc:'TIM', valor:32.99, categoria:'Telefonia e Internet', status:'pendente'},
+      {id:uid(), desc:'Casa', valor:858.54, categoria:'Moradia', status:'pendente'},
+      {id:uid(), desc:'Luz', valor:68.93, categoria:'Contas fixas', status:'pendente'},
+      {id:uid(), desc:'HC', valor:140.00, categoria:'Saúde', status:'pendente'},
+      {id:uid(), desc:'Cartão Bradesco', valor:721.27, categoria:'Cartão de crédito', status:'pendente'},
+      {id:uid(), desc:'Internet', valor:99.90, categoria:'Telefonia e Internet', status:'pendente'},
+      {id:uid(), desc:'Custas Processuais', valor:1043.16, categoria:'Jurídico', status:'pendente'},
+      {id:uid(), desc:'IPTU Chácara', valor:195.30, categoria:'Moradia', status:'pendente'},
+      {id:uid(), desc:'Impostos Lotes', valor:108.12, categoria:'Impostos e taxas', status:'pendente'},
+      {id:uid(), desc:'Escola Julia', valor:1390.00, categoria:'Educação', status:'pago'},
+      {id:uid(), desc:'Consórcio', valor:733.08, categoria:'Consórcio', status:'pago'},
+      {id:uid(), desc:'FIES', valor:514.90, categoria:'Empréstimos e financiamentos', status:'pago'},
+      {id:uid(), desc:'Terreno Paraguay', valor:400.00, categoria:'Terrenos e imóveis', status:'pago'},
+      {id:uid(), desc:'Nubank', valor:1027.08, categoria:'Cartão de crédito', status:'pago'}
     ]
   };
   state.cartoes = [
-    {id:uid(), nome:'Exemplo', saldo:2942.57}
+    {id:uid(), nome:'Cartão Bradesco', saldo:2942.57},
+    {id:uid(), nome:'Cartão Nubank', saldo:2761.08}
   ];
   state.outras = [
-    {id:uid(), nome:'Exemplo', total:64362.50, pago:0, parcela:554.90, prazo:0}
+    {id:uid(), nome:'FIES', total:64362.50, pago:0, parcela:514.90, prazo:0}
   ];
   save();
 }
@@ -696,30 +790,42 @@ let currentDate = new Date();
 function monthKey(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); }
 function monthLabelFor(d){ return MONTHS[d.getMonth()] + ' de ' + d.getFullYear(); }
 
+// Só um mês "travado" (locked) conta como fonte real de dados: um mês fica travado
+// assim que o usuário adiciona, edita, exclui ou marca como pago algo nele.
+// Meses ainda não tocados pelo usuário são apenas uma "prévia" recalculada a partir
+// do mês travado mais recente — assim, ao editar o mês atual, todo mês futuro que
+// ainda não foi mexido acompanha a mudança automaticamente, em vez de ficar
+// congelado com os dados antigos só por ter sido visualizado.
 function findPreviousMonthData(key){
   const [y,m] = key.split('-').map(Number);
   let d = new Date(y, m-2, 1);
   for(let i=0;i<24;i++){
     const k = monthKey(d);
-    if(state.gastos[k]) return state.gastos[k];
+    const entry = state.gastos[k];
+    if(entry && entry.locked) return entry;
     d.setMonth(d.getMonth()-1);
   }
   return null;
 }
 function getMonthData(key){
-  if(!state.gastos[key]){
-    const prev = findPreviousMonthData(key);
-    if(prev){
-      state.gastos[key] = {
+  const existing = state.gastos[key];
+  if(existing && existing.locked) return existing;
+
+  const prev = findPreviousMonthData(key);
+  const fresh = prev
+    ? {
+        locked:false,
         rendas: prev.rendas.map(r=>({...r, id:uid()})),
         despesas: prev.despesas.map(d=>({...d, id:uid(), status:'pendente'}))
-      };
-    } else {
-      state.gastos[key] = { rendas:[], despesas:[] };
-    }
-    save();
-  }
-  return state.gastos[key];
+      }
+    : { locked:false, rendas:[], despesas:[] };
+  state.gastos[key] = fresh;
+  return fresh;
+}
+// Chame antes de salvar qualquer alteração manual num mês, para "confirmar" esse
+// mês como definitivo e ele parar de copiar automaticamente o mês anterior.
+function lockMonth(key){
+  if(state.gastos[key]) state.gastos[key].locked = true;
 }
 
 document.getElementById('prevMonth').addEventListener('click', ()=>{
@@ -746,6 +852,8 @@ function renderGastos(){
 
   document.getElementById('rendaCount').textContent = data.rendas.length;
   document.getElementById('gastoCount').textContent = data.despesas.length;
+  document.getElementById('rendaSum').textContent = brl(totalRenda);
+  document.getElementById('gastoSum').textContent = brl(totalGastos);
 
   // Cabeçalho fica azul quando todas as contas do mês já estão pagas
   const todasPagas = data.despesas.length>0 && totalFalta===0;
@@ -756,7 +864,7 @@ function renderGastos(){
   document.getElementById('rendaEmpty').style.display = data.rendas.length ? 'none':'block';
   data.rendas.slice().reverse().forEach(item=>{
     rl.appendChild(renderLedgerItem(item,'income',
-      ()=>{ data.rendas = data.rendas.filter(x=>x.id!==item.id); save(); renderGastos(); renderDashboard(); },
+      ()=>{ data.rendas = data.rendas.filter(x=>x.id!==item.id); lockMonth(key); save(); renderGastos(); renderDashboard(); },
       null, null, null,
       ()=>{ openFormForEdit(document.getElementById('rendaForm'), f=>{
         f.querySelector('#rendaDesc').value = item.desc;
@@ -777,9 +885,9 @@ function renderGastos(){
   });
   despesasOrdenadas.forEach(item=>{
     gl.appendChild(renderLedgerItem(item,'expense',
-      ()=>{ data.despesas = data.despesas.filter(x=>x.id!==item.id); save(); renderGastos(); renderDashboard(); },
+      ()=>{ data.despesas = data.despesas.filter(x=>x.id!==item.id); lockMonth(key); save(); renderGastos(); renderDashboard(); },
       item.categoria, item.status,
-      ()=>{ item.status = item.status==='pago' ? 'pendente' : 'pago'; save(); renderGastos(); renderDashboard(); },
+      ()=>{ item.status = item.status==='pago' ? 'pendente' : 'pago'; lockMonth(key); save(); renderGastos(); renderDashboard(); },
       ()=>{ openFormForEdit(document.getElementById('gastoForm'), f=>{
         f.querySelector('#gastoDesc').value = item.desc;
         f.querySelector('#gastoValor').value = item.valor;
@@ -841,7 +949,8 @@ document.getElementById('rendaForm').addEventListener('submit', e=>{
   const desc = document.getElementById('rendaDesc').value.trim();
   const valor = parseFloat(document.getElementById('rendaValor').value);
   if(!desc || isNaN(valor)) return;
-  const list = getMonthData(monthKey(currentDate)).rendas;
+  const key = monthKey(currentDate);
+  const list = getMonthData(key).rendas;
   const editId = e.target.dataset.editId;
   if(editId){
     const item = list.find(x=>x.id===editId);
@@ -849,6 +958,7 @@ document.getElementById('rendaForm').addEventListener('submit', e=>{
   } else {
     list.push({id:uid(), desc, valor});
   }
+  lockMonth(key);
   save();
   closeForm(e.target);
   renderGastos(); renderDashboard();
@@ -862,7 +972,8 @@ document.getElementById('gastoForm').addEventListener('submit', e=>{
   const status = document.getElementById('gastoStatus').value;
   const vencimento = document.getElementById('gastoVencimento').value || null;
   if(!desc || isNaN(valor)) return;
-  const list = getMonthData(monthKey(currentDate)).despesas;
+  const key = monthKey(currentDate);
+  const list = getMonthData(key).despesas;
   const editId = e.target.dataset.editId;
   if(editId){
     const item = list.find(x=>x.id===editId);
@@ -870,6 +981,7 @@ document.getElementById('gastoForm').addEventListener('submit', e=>{
   } else {
     list.push({id:uid(), desc, valor, categoria, status, vencimento});
   }
+  lockMonth(key);
   save();
   closeForm(e.target);
   renderGastos(); renderDashboard();
@@ -1106,5 +1218,75 @@ if('serviceWorker' in navigator){
 }
 </script>
 
+<!-- ============ Módulo de nuvem (usa o cloud-sync.js do seu outro app) ============ -->
+<script type="module" src="cloud-sync.js"></script>
+<script>
+document.getElementById('authLoading').classList.add('open');
+
+function wireCloudSync(){
+  if(!window.CloudSync){
+    window.addEventListener('cloudsync-pronto', wireCloudSync, {once:true});
+    return;
+  }
+  document.getElementById('logoutBtn').style.display = 'flex';
+
+  window.CloudSync.onAuthStateChanged(async user=>{
+    document.getElementById('authLoading').classList.remove('open');
+    if(user){
+      currentUser = user;
+      document.getElementById('loginScreen').classList.remove('open');
+      try{
+        const cloudDoc = await window.CloudSync.buscarDaNuvem(user.uid);
+        if(cloudDoc && cloudDoc.gestaoFinanceira){
+          state = cloudDoc.gestaoFinanceira;
+          Object.values(state.gastos||{}).forEach(mes=>{ if(mes.locked===undefined) mes.locked = true; });
+        } else {
+          await pushStateToCloud();
+        }
+      }catch(e){ console.error('Erro ao buscar dados da nuvem:', e); }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderGastos(); renderCartoes(); renderOutras(); renderDashboard();
+    } else {
+      currentUser = null;
+      document.getElementById('loginScreen').classList.add('open');
+    }
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass = document.getElementById('loginPassword').value;
+    const errEl = document.getElementById('loginError');
+    errEl.classList.remove('show');
+    window.CloudSync.login(email, pass).catch(()=>{
+      errEl.textContent = 'E-mail ou senha incorretos.';
+      errEl.classList.add('show');
+    });
+  });
+
+  document.getElementById('btnCriarConta').addEventListener('click', ()=>{
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass = document.getElementById('loginPassword').value;
+    const errEl = document.getElementById('loginError');
+    errEl.classList.remove('show');
+    if(!email || pass.length<6){
+      errEl.textContent = 'Preencha e-mail e uma senha com pelo menos 6 caracteres.';
+      errEl.classList.add('show');
+      return;
+    }
+    window.CloudSync.cadastrar(email, pass).catch(err=>{
+      errEl.textContent = 'Não foi possível criar a conta: ' + err.message;
+      errEl.classList.add('show');
+    });
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', ()=>{
+    if(!confirm('Deseja sair da sua conta?')) return;
+    window.CloudSync.logout();
+  });
+}
+wireCloudSync();
+</script>
+</script>
 </body>
 </html>
