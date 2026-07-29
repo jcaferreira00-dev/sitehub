@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<title>Meu Bolso — controle por envelopes | Tem Direito?</title>
+<meta name="description" content="Divida seu dinheiro em envelopes digitais e nunca mais estoure o orçamento do mês.">
+<link rel="canonical" href="https://consultarbeneficios.com.br/meu-bolso/">
+<meta name="theme-color" content="#1B2430">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..600,0..1,-50..200">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- Barra de razão (ledger bar) -->
+  <header class="ledger-bar">
+    <div class="ledger-top">
+      <div class="ledger-mes" id="ledger-mes">Julho 2026</div>
+      <button class="icon-btn" id="btn-mes-anterior" aria-label="Mês anterior">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+      <button class="icon-btn" id="btn-mes-proximo" aria-label="Próximo mês">
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
+    </div>
+    <div class="ledger-stats">
+      <div class="stat">
+        <span class="stat-label">orçado</span>
+        <span class="stat-value" id="stat-orcado">R$ 0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">gasto</span>
+        <span class="stat-value" id="stat-gasto">R$ 0</span>
+      </div>
+      <div class="stat stat-livre">
+        <span class="stat-label">livre</span>
+        <span class="stat-value" id="stat-livre">R$ 0</span>
+      </div>
+    </div>
+    <div class="ledger-bar-track">
+      <div class="ledger-bar-fill" id="ledger-bar-fill"></div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- VIEW: Início -->
+    <section class="view active" id="view-inicio">
+      <div class="envelopes-grid" id="envelopes-grid"></div>
+      <div class="empty-state" id="empty-inicio" hidden>
+        <span class="material-symbols-outlined empty-icon">mail</span>
+        <p>Você ainda não tem envelopes.</p>
+        <button class="btn-azul" id="btn-criar-primeiro">Criar meu primeiro envelope</button>
+      </div>
+    </section>
+
+    <!-- VIEW: Envelopes (gerenciar) -->
+    <section class="view" id="view-envelopes">
+      <div class="section-head">
+        <h2>Seus envelopes</h2>
+        <button class="btn-azul" id="btn-novo-envelope">
+          <span class="material-symbols-outlined">add</span> Novo
+        </button>
+      </div>
+      <div class="envelope-list" id="envelope-list"></div>
+    </section>
+
+    <!-- VIEW: Extrato -->
+    <section class="view" id="view-extrato">
+      <div class="section-head">
+        <h2>Extrato</h2>
+      </div>
+      <div class="extrato-filtros">
+        <select id="filtro-envelope">
+          <option value="todos">Todos os envelopes</option>
+        </select>
+      </div>
+      <div class="extrato-lista" id="extrato-lista"></div>
+      <div class="empty-state" id="empty-extrato" hidden>
+        <span class="material-symbols-outlined empty-icon">receipt_long</span>
+        <p>Nenhum lançamento neste mês.</p>
+      </div>
+    </section>
+
+    <!-- VIEW: Ajustes -->
+    <section class="view" id="view-ajustes">
+      <div class="section-head">
+        <h2>Ajustes</h2>
+      </div>
+
+      <div class="ajuste-card">
+        <div class="ajuste-row">
+          <div>
+            <strong>Dia de fechamento do mês</strong>
+            <p class="ajuste-desc">Em qual dia o mês vira para seus envelopes.</p>
+          </div>
+          <select id="config-dia-fechamento">
+            <!-- preenchido via JS -->
+          </select>
+        </div>
+      </div>
+
+      <div class="ajuste-card">
+        <div class="ajuste-row ajuste-row-stack">
+          <div>
+            <strong>Backup dos seus dados</strong>
+            <p class="ajuste-desc">Tudo fica salvo só neste aparelho. Exporte de vez em quando para não perder nada.</p>
+          </div>
+          <div class="ajuste-botoes">
+            <button class="btn-secondary" id="btn-exportar">
+              <span class="material-symbols-outlined">download</span> Exportar backup
+            </button>
+            <button class="btn-secondary" id="btn-importar">
+              <span class="material-symbols-outlined">upload</span> Importar backup
+            </button>
+            <input type="file" id="input-importar" accept="application/json" hidden>
+          </div>
+        </div>
+      </div>
+
+      <div class="ajuste-card ajuste-card-perigo">
+        <div class="ajuste-row">
+          <div>
+            <strong>Apagar todos os dados</strong>
+            <p class="ajuste-desc">Remove envelopes e lançamentos deste aparelho. Não tem como desfazer.</p>
+          </div>
+          <button class="btn-perigo" id="btn-apagar-tudo">Apagar tudo</button>
+        </div>
+      </div>
+
+      <div class="sobre-app">
+        <p>Meu Bolso 1.0 · seus dados ficam só no seu aparelho, sem nuvem.</p>
+        <p>Parte do <a href="/">Tem Direito?</a> · <a href="privacy.html">Política de privacidade</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="fab-wrap" id="fab-wrap">
+    <button class="fab" id="fab-add" aria-label="Novo lançamento">
+      <span class="material-symbols-outlined">add</span>
+    </button>
+  </div>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-view="inicio">
+      <span class="material-symbols-outlined">grid_view</span>
+      <span>Início</span>
+    </button>
+    <button class="nav-btn" data-view="envelopes">
+      <span class="material-symbols-outlined">mail</span>
+      <span>Envelopes</span>
+    </button>
+    <button class="nav-btn" data-view="extrato">
+      <span class="material-symbols-outlined">receipt_long</span>
+      <span>Extrato</span>
+    </button>
+    <button class="nav-btn" data-view="ajustes">
+      <span class="material-symbols-outlined">tune</span>
+      <span>Ajustes</span>
+    </button>
+  </nav>
+
+</div>
+
+<!-- SHEET: novo lançamento -->
+<div class="sheet-overlay" id="overlay"></div>
+
+<div class="sheet" id="sheet-lancamento">
+  <div class="sheet-handle"></div>
+  <h3 class="sheet-title">Novo lançamento</h3>
+
+  <div class="campo">
+    <label>Envelope</label>
+    <div class="chips" id="chips-envelope"></div>
+  </div>
+
+  <div class="campo">
+    <label for="input-valor">Valor</label>
+    <div class="input-valor-wrap">
+      <span>R$</span>
+      <input type="text" inputmode="decimal" id="input-valor" placeholder="0,00" maxlength="13">
+    </div>
+  </div>
+
+  <div class="campo">
+    <label for="input-data">Data</label>
+    <input type="date" id="input-data">
+  </div>
+  <div class="campo">
+    <label for="input-nota">Nota (opcional)</label>
+    <input type="text" id="input-nota" placeholder="Ex: mercado da semana" maxlength="60">
+  </div>
+
+  <button class="btn-primary btn-full" id="btn-salvar-lancamento">Salvar lançamento</button>
+</div>
+
+<!-- SHEET: novo/editar envelope -->
+<div class="sheet" id="sheet-envelope">
+  <div class="sheet-handle"></div>
+  <h3 class="sheet-title" id="titulo-sheet-envelope">Novo envelope</h3>
+
+  <div class="campo">
+    <label for="input-nome-envelope">Nome</label>
+    <input type="text" id="input-nome-envelope" placeholder="Ex: Mercado" maxlength="24">
+  </div>
+
+  <div class="campo">
+    <label for="input-limite-envelope">Limite mensal</label>
+    <div class="input-valor-wrap">
+      <span>R$</span>
+      <input type="text" inputmode="decimal" id="input-limite-envelope" placeholder="0,00" maxlength="13">
+    </div>
+  </div>
+
+  <div class="campo">
+    <label>Ícone</label>
+    <div class="icon-grid" id="icon-grid"></div>
+  </div>
+
+  <div class="campo">
+    <label>Cor do papel</label>
+    <div class="paper-grid" id="paper-grid"></div>
+  </div>
+
+  <button class="btn-primary btn-full" id="btn-salvar-envelope">Salvar envelope</button>
+  <button class="btn-texto-perigo" id="btn-excluir-envelope" hidden>Excluir este envelope</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
