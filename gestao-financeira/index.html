@@ -594,35 +594,18 @@ function seedInitialData(){
   const key = monthKey(new Date());
   state.gastos[key] = {
     rendas: [
-      {id:uid(), desc:'Vale dia 15', valor:4314.16},
-      {id:uid(), desc:'Pagamento dia 30', valor:7085.44}
+      {id:uid(), desc:'Exemplo', valor:1616.00},
     ],
     despesas: [
-      {id:uid(), desc:'Processo', valor:500.00, categoria:'Jurídico', status:'pendente'},
-      {id:uid(), desc:'Água', valor:110.73, categoria:'Contas fixas', status:'pendente'},
-      {id:uid(), desc:'Luz Chácara', valor:63.79, categoria:'Contas fixas', status:'pendente'},
-      {id:uid(), desc:'TIM', valor:32.99, categoria:'Telefonia e Internet', status:'pendente'},
-      {id:uid(), desc:'Casa', valor:858.54, categoria:'Moradia', status:'pendente'},
-      {id:uid(), desc:'Luz', valor:68.93, categoria:'Contas fixas', status:'pendente'},
-      {id:uid(), desc:'HC', valor:140.00, categoria:'Saúde', status:'pendente'},
-      {id:uid(), desc:'Cartão Bradesco', valor:721.27, categoria:'Cartão de crédito', status:'pendente'},
-      {id:uid(), desc:'Internet', valor:99.90, categoria:'Telefonia e Internet', status:'pendente'},
-      {id:uid(), desc:'Custas Processuais', valor:1043.16, categoria:'Jurídico', status:'pendente'},
-      {id:uid(), desc:'IPTU Chácara', valor:195.30, categoria:'Moradia', status:'pendente'},
-      {id:uid(), desc:'Impostos Lotes', valor:108.12, categoria:'Impostos e taxas', status:'pendente'},
-      {id:uid(), desc:'Escola Julia', valor:1390.00, categoria:'Educação', status:'pago'},
-      {id:uid(), desc:'Consórcio', valor:733.08, categoria:'Consórcio', status:'pago'},
-      {id:uid(), desc:'FIES', valor:514.90, categoria:'Empréstimos e financiamentos', status:'pago'},
-      {id:uid(), desc:'Terreno Paraguay', valor:400.00, categoria:'Terrenos e imóveis', status:'pago'},
-      {id:uid(), desc:'Nubank', valor:1027.08, categoria:'Cartão de crédito', status:'pago'}
+  
+      {id:uid(), desc:'Exemplo', valor:110.73, categoria:'Contas fixas', status:'pendente'},
     ]
   };
   state.cartoes = [
-    {id:uid(), nome:'Cartão Bradesco', saldo:2942.57},
-    {id:uid(), nome:'Cartão Nubank', saldo:2761.08}
+    {id:uid(), nome:'Exemplo', saldo:2942.57}
   ];
   state.outras = [
-    {id:uid(), nome:'FIES', total:64362.50, pago:0, parcela:514.90, prazo:0}
+    {id:uid(), nome:'Exemplo', total:64362.50, pago:0, parcela:554.90, prazo:0}
   ];
   save();
 }
