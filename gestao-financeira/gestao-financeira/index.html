@@ -589,23 +589,6 @@ function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(
 function brl(n){ n = Number(n)||0; return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
 function escapeHtml(s){ const d=document.createElement('div'); d.textContent=s??''; return d.innerHTML; }
 
-/* ============ Dados iniciais (importados da planilha, só na primeira vez) ============ */
-function seedInitialData(){
-  const key = monthKey(new Date());
-  state.gastos[key] = {
-    rendas: [
-      
-    ],
-    despesas: [
-          ]
-  };
-  state.cartoes = [
-    ];
-  state.outras = [
-          ];
-  save();
-}
-
 /* ============ Tema ============ */
 function applyTheme(t){
   document.body.setAttribute('data-theme', t);
