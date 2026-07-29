@@ -474,7 +474,9 @@
   .tools .section-head h2{ color: var(--teal-dark); }
   .tools-grid{
     display:flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 18px;
   }
   .tool-card{
     background: var(--surface);
@@ -493,11 +495,11 @@
   .tool-card:hover{ box-shadow: var(--shadow); transform: translateY(-2px); }
   .tool-card:focus-visible{ outline: 3px solid var(--teal); outline-offset: 2px; }
   .tool-card::before{
-    content: "MB";
+    content: attr(data-badge);
     flex-shrink: 0;
     width: 48px; height: 48px;
     border-radius: 14px;
-    background: #16A34A;
+    background: var(--badge-bg, #16A34A);
     color: #fff;
     font-family: 'Fredoka', sans-serif;
     font-weight: 700;
@@ -506,6 +508,7 @@
     align-items:center;
     justify-content:center;
   }
+
   .tool-card-text{ flex: 1; }
   .tool-card h3{
     font-size: 1rem;
@@ -750,14 +753,21 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Organize sua vida financeira</h2>
-      <p>Um app que também fizemos pra cuidar do seu dinheiro no dia a dia.</p>
+      <p>Apps que também fizemos pra cuidar do seu dinheiro no dia a dia.</p>
     </div>
 
     <div class="tools-grid">
-      <a class="tool-card" href="/meu-bolso/">
+      <a class="tool-card" data-badge="MB" href="/meu-bolso/">
         <div class="tool-card-text">
           <h3>Meu Bolso</h3>
           <p>Controle seus gastos por categoria, no modelo de envelopes digitais.</p>
+          <div class="arrow">Abrir app →</div>
+        </div>
+      </a>
+      <a class="tool-card" data-badge="GF" style="--badge-bg:#0891B2" href="/gestao-financeira/">
+        <div class="tool-card-text">
+          <h3>Gestão Financeira</h3>
+          <p>Controle mensal de gastos, cartões de crédito e outras dívidas em um só lugar.</p>
           <div class="arrow">Abrir app →</div>
         </div>
       </a>
