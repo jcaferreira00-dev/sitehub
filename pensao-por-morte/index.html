@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#475569">
+<title>Pensão por Morte 2026 — Calculadora | Tem Direito?</title>
+<meta name="description" content="Calcule o valor estimado da pensão por morte para dependentes de segurados do INSS, com as regras e prazos vigentes em 2026.">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back-link" href="/">← Tem Direito?</a>
+    <div class="header-right"><div class="logo-mark">Pensão por Morte</div><button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro ou escuro" type="button">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+      </button></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Consulta gratuita</span>
+    <h1>Apoio pra quem perdeu um familiar segurado do INSS</h1>
+    <p>Se o falecido contribuía para o INSS (ou já recebia aposentadoria), os dependentes podem ter direito a um valor mensal. Veja uma estimativa do benefício e por quanto tempo ele costuma durar.</p>
+  </section>
+
+  <section class="calc-card" id="calc">
+    <h2>Calculadora de pensão por morte</h2>
+    <div class="calc-sub">Baseado nas regras vigentes em 2026 (pós-Reforma da Previdência).</div>
+
+    <div class="field">
+      <label for="base">Valor da aposentadoria que o(a) falecido(a) recebia (ou teria direito) (R$)</label>
+      <input type="number" id="base" inputmode="decimal" placeholder="Ex: 2200">
+    </div>
+
+    <div class="field-row two">
+      <div class="field">
+        <label for="deps">Nº total de dependentes habilitados</label>
+        <input type="number" id="deps" inputmode="numeric" placeholder="Ex: 2">
+      </div>
+      <div class="field">
+        <label for="tipo">Seu vínculo com o(a) falecido(a)</label>
+        <select id="tipo" onchange="atualizarCampos()">
+          <option value="conjuge">Cônjuge ou companheiro(a)</option>
+          <option value="filho">Filho(a) menor de 21 anos</option>
+          <option value="outro">Outro dependente</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="conjugeFields">
+      <div class="field">
+        <label for="idadeConjuge">Sua idade na data do óbito</label>
+        <input type="number" id="idadeConjuge" inputmode="numeric" placeholder="Ex: 38">
+      </div>
+      <div class="checklist">
+        <label><input type="checkbox" id="uniao2anos"> O casamento ou união estável já durava 2 anos ou mais</label>
+        <label><input type="checkbox" id="contrib18"> O(a) falecido(a) tinha pelo menos 18 contribuições mensais ao INSS</label>
+      </div>
+    </div>
+
+    <button class="btn" onclick="calcular()">Calcular</button>
+
+    <div class="result" id="resultado">
+      <div class="r-label" id="r-label">Resultado</div>
+      <div class="r-value" id="r-value">—</div>
+      <div class="r-note" id="r-note"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Como funciona o cálculo</h2>
+    <div class="info-grid">
+      <div class="info-item"><div class="n">Valor</div><p>50% do benefício base + 10% por dependente habilitado, até 100% com 5 ou mais dependentes.</p></div>
+      <div class="info-item"><div class="n">Mínimo</div><p>Nunca pode ficar abaixo de 1 salário mínimo (R$ 1.621,00 em 2026).</p></div>
+      <div class="info-item"><div class="n">Filhos</div><p>Recebem até completar 21 anos, ou vitaliciamente se houver invalidez ou deficiência grave.</p></div>
+      <div class="info-item"><div class="n">Cônjuge/companheiro(a)</div><p>Duração conforme idade na data do óbito, desde que cumpridos união de 2 anos e carência de 18 contribuições.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Como pedir</h2>
+    <p>O pedido é feito pelo <strong>Meu INSS</strong> (app ou site) ou pelo telefone 135, com certidão de óbito, documentos que comprovem o vínculo com o falecido (casamento, união estável, nascimento) e, se possível, o histórico de contribuições (CNIS). Quanto antes o pedido for feito, melhor — a pensão costuma ser devida desde a data do óbito quando solicitada em até 180 dias (90 dias para filhos menores).</p>
+  </section>
+
+  <section class="section">
+    <h2>Perguntas frequentes</h2>
+    <details>
+      <summary>Existe carência para pedir pensão por morte?</summary>
+      <p>Em regra, não — desde que o falecido tivesse a qualidade de segurado. A exceção é a regra de 18 contribuições e 2 anos de união para cônjuge/companheiro(a), que existe pra evitar fraudes, e não se aplica em caso de acidente ou doença posterior ao casamento.</p>
+    </details>
+    <details>
+      <summary>Um ex-cônjuge que recebia pensão alimentícia tem direito?</summary>
+      <p>Pode ter, se comprovar que dependia economicamente do falecido através de pensão alimentícia formalizada judicialmente.</p>
+    </details>
+    <details>
+      <summary>Pais podem receber pensão por morte de um filho?</summary>
+      <p>Sim, se comprovarem dependência econômica do filho falecido — nesse caso não há prazo automático como cônjuge ou filho, dura enquanto persistir a condição.</p>
+    </details>
+    <details>
+      <summary>O que acontece se um dependente perder o direito?</summary>
+      <p>A cota dele é redistribuída entre os dependentes restantes, aumentando a parte de cada um, dentro do limite de 100% do valor base.</p>
+    </details>
+
+    <div class="disclaimer">
+      <strong>Aviso:</strong> cálculo baseado na Lei 13.846/2019 e na EC 103/2019, com o salário mínimo de 2026 (R$ 1.621,00). Casos como múltiplos casamentos, dependentes de categorias diferentes ou dúvidas sobre a limitação de 4 meses mudam bastante o resultado — recomendamos fortemente confirmar com um advogado previdenciário.
+    </div>
+  </section>
+</main>
+
+<section class="app-promo">
+  <div class="wrap">
+    <div class="app-promo-label">Organize sua vida financeira</div>
+    <a class="app-promo-card" href="/meu-bolso/">
+      <div class="app-promo-icon">MB</div>
+      <div class="app-promo-text">
+        <h3>Meu Bolso</h3>
+        <p>Controle seus gastos por categoria, no modelo de envelopes digitais.</p>
+      </div>
+      <svg class="app-promo-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Parte do <a href="/">Tem Direito?</a> · <a href="privacy.html">Política de Privacidade</a></p>
+    <p>© 2026 · consultarbeneficios.com.br</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+  (function(){
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var saved = localStorage.getItem('temdireito-theme');
+    if(saved === 'dark'){ root.setAttribute('data-theme', 'dark'); }
+    if(toggle){
+      toggle.addEventListener('click', function(){
+        var isDark = root.getAttribute('data-theme') === 'dark';
+        if(isDark){
+          root.removeAttribute('data-theme');
+          localStorage.setItem('temdireito-theme', 'light');
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          localStorage.setItem('temdireito-theme', 'dark');
+        }
+      });
+    }
+    atualizarCampos();
+  })();
+</script>
+</body>
+</html>

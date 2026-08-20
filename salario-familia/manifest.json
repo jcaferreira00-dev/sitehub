@@ -1,0 +1,21 @@
+{
+  "name": "Salário-Família — Tem Direito?",
+  "short_name": "Salário-Famíli",
+  "start_url": "/salario-familia/index.html",
+  "scope": "/salario-familia/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#65A30D",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
