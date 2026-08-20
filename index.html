@@ -250,7 +250,7 @@
   }
   @media (min-width: 700px){
     .featured{
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: 1fr auto auto;
       padding: 22px 28px;
       gap: 28px;
     }
@@ -403,6 +403,11 @@
   }
   @media (min-width: 640px){
     .grid{ grid-template-columns: 1fr 1fr; }
+    /* Se sobrar um card sozinho na última linha, ele ocupa a largura toda
+       em vez de deixar uma célula vazia do lado. */
+    .grid > .card-live:last-child:nth-child(odd){
+      grid-column: 1 / -1;
+    }
   }
 
   .card-live{
