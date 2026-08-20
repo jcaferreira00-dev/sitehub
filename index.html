@@ -24,40 +24,42 @@
 <meta name="twitter:image" content="https://consultarbeneficios.com.br/assets/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #FFFFFF;
-    --bg-soft: #F7F6F1;
-    --ink: #1F2A28;
-    --ink-soft: #647169;
-    --teal: #128C74;
-    --teal-dark: #0D6E5B;
-    --teal-tint: #E9F6F1;
-    --orange: #FF7A3D;
-    --orange-dark: #E85F22;
-    --orange-tint: #FFF0E6;
-    --yellow: #FFC93C;
-    --muted-border: #E9E4D6;
-    --muted-bg: #FAF8F1;
+    --bg-soft: #F6F7F9;
+    --ink: #111827;
+    --ink-soft: #5B6472;
+    --ink-faint: #8B93A1;
+    --primary: #0F6D5C;
+    --primary-dark: #0B5346;
+    --primary-tint: #E9F5F2;
+    --accent: #B45309;
+    --accent-tint: #FCF1E6;
+    --muted-border: #E4E7EC;
+    --muted-bg: #F6F7F9;
     --white: #FFFFFF;
     --surface: #FFFFFF;
-    --shadow: 0 16px 34px -18px rgba(31,42,40,0.18);
-    --radius: 20px;
+    --shadow: 0 12px 28px -16px rgba(17,24,39,0.16);
+    --radius: 16px;
   }
 
   html[data-theme="dark"]{
-    --bg: #14201D;
-    --bg-soft: #192622;
-    --ink: #F1F3EF;
-    --ink-soft: #A9B5AF;
-    --teal: #3BD1AC;
-    --teal-dark: #7FE4C9;
-    --teal-tint: #1C2E29;
-    --muted-border: #2A3733;
-    --muted-bg: #1B2723;
-    --surface: #1C2825;
-    --shadow: 0 16px 34px -18px rgba(0,0,0,0.5);
+    --bg: #0E1512;
+    --bg-soft: #131B18;
+    --ink: #EDEFF2;
+    --ink-soft: #9AA3AD;
+    --ink-faint: #6C757F;
+    --primary: #35B39B;
+    --primary-dark: #67D6BE;
+    --primary-tint: #16261F;
+    --accent: #E3922E;
+    --accent-tint: #221A0F;
+    --muted-border: #23302B;
+    --muted-bg: #16211D;
+    --surface: #141F1B;
+    --shadow: 0 12px 28px -16px rgba(0,0,0,0.55);
   }
 
   *{ box-sizing: border-box; }
@@ -71,16 +73,16 @@
     margin:0;
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 17px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
     line-height: 1.6;
     transition: background .25s ease, color .25s ease;
   }
 
   h1,h2,h3, .logo{
-    font-family: 'Fredoka', sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.015em;
     margin: 0;
   }
 
@@ -95,7 +97,8 @@
 
   /* ---------- HEADER ---------- */
   header{
-    padding: 22px 0;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--muted-border);
   }
   header .wrap{
     display:flex;
@@ -103,19 +106,19 @@
     justify-content: space-between;
   }
   .logo{
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--orange-dark);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--ink);
     display:flex;
     align-items:center;
     gap:2px;
   }
   .logo .dot{
-    color: var(--teal);
+    color: var(--primary);
   }
   .menu-icon{
-    width: 26px; height: 26px;
-    color: var(--ink);
+    width: 24px; height: 24px;
+    color: var(--ink-soft);
     cursor: pointer;
   }
   .header-actions{
@@ -124,11 +127,11 @@
     gap: 14px;
   }
   .theme-toggle{
-    width: 40px; height: 40px;
-    border-radius: 50%;
+    width: 38px; height: 38px;
+    border-radius: 10px;
     border: 1px solid var(--muted-border);
     background: var(--bg-soft);
-    color: var(--ink);
+    color: var(--ink-soft);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -136,9 +139,9 @@
     padding: 0;
     transition: background .2s ease, border-color .2s ease;
   }
-  .theme-toggle:hover{ background: var(--muted-bg); }
-  .theme-toggle:focus-visible{ outline: 3px solid var(--teal); outline-offset: 2px; }
-  .theme-toggle svg{ width: 19px; height: 19px; }
+  .theme-toggle:hover{ background: var(--muted-bg); border-color: var(--primary); }
+  .theme-toggle:focus-visible{ outline: 3px solid var(--primary); outline-offset: 2px; }
+  .theme-toggle svg{ width: 18px; height: 18px; }
   .theme-toggle .icon-sun{ display: block; }
   .theme-toggle .icon-moon{ display: none; }
   html[data-theme="dark"] .theme-toggle .icon-sun{ display: none; }
@@ -146,189 +149,187 @@
 
   /* ---------- HERO ---------- */
   .hero{
-    padding: 40px 0 20px;
+    padding: 56px 0 8px;
     position: relative;
     overflow: hidden;
   }
   .hero::before{
     content:"";
     position:absolute;
-    top: -180px; right: -160px;
-    width: 480px; height: 480px;
+    top: -220px; right: -220px;
+    width: 520px; height: 520px;
     border-radius: 50%;
-    background: radial-gradient(circle, var(--teal-tint) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--primary-tint) 0%, transparent 72%);
     z-index: -1;
     pointer-events: none;
   }
-  .hero::after{
-    content:"";
-    position:absolute;
-    bottom: -200px; left: -180px;
-    width: 420px; height: 420px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--orange-tint) 0%, transparent 70%);
-    z-index: -1;
-    pointer-events: none;
+  .hero .wrap{ max-width: 780px; }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color: var(--primary-dark);
+    background: var(--primary-tint);
+    border: 1px solid color-mix(in srgb, var(--primary) 24%, transparent);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin-bottom: 20px;
   }
-  .hero .wrap{
-    display:grid;
-    gap: 40px;
+  .eyebrow .dot{
+    width:6px; height:6px; border-radius:50%;
+    background: var(--primary);
+    flex-shrink: 0;
   }
   .hero h1{
-    font-size: clamp(2.5rem, 7vw, 4.2rem);
-    font-weight: 700;
-    line-height: 1.08;
+    font-size: clamp(2.1rem, 5vw, 3.1rem);
+    font-weight: 800;
+    line-height: 1.15;
     color: var(--ink);
     letter-spacing: -0.02em;
   }
   .hero h1 span{
-    color: var(--teal);
-    position: relative;
-    white-space: nowrap;
+    color: var(--primary);
   }
   .hero-sub{
-    margin-top: 22px;
+    margin-top: 18px;
     max-width: 560px;
-    font-size: 1.15rem;
+    font-size: 1.08rem;
     color: var(--ink-soft);
   }
-  .hero-cta{
-    margin-top: 30px;
+  .hero-actions{
+    margin-top: 28px;
+    display:flex;
+    flex-wrap: wrap;
+    align-items:center;
+    gap: 16px;
   }
 
-  /* Featured PIS card — signature element */
-  .featured{
-    position: relative;
-    background: var(--featured-accent, var(--orange));
-    border-radius: 22px;
-    padding: 26px 28px;
-    color: var(--white);
-    overflow: hidden;
-    isolation: isolate;
-  }
-  .featured::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-image:
-      radial-gradient(circle at 96% 10%, rgba(255,255,255,0.14) 0, rgba(255,255,255,0.14) 70px, transparent 71px),
-      radial-gradient(circle at 4% 96%, rgba(255,255,255,0.10) 0, rgba(255,255,255,0.10) 46px, transparent 47px);
-    z-index: 0;
-  }
-  .featured > *{ position: relative; z-index: 1; }
-  .featured-top{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap: 18px;
-    align-items:center;
-  }
-  @media (min-width: 720px){
-    .featured-top{ grid-template-columns: 1.6fr 1fr; }
-  }
-  .featured-icon{
-    justify-self: center;
-    width: 100%;
-    max-width: 130px;
-  }
-  .featured-icon svg{
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .featured-eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background: rgba(255,255,255,0.16);
-    border: 1px solid rgba(255,255,255,0.3);
-    padding: 5px 12px;
-    border-radius: 100px;
-    font-size: 0.74rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .featured-eyebrow .pulse{
-    width:8px; height:8px; border-radius:50%;
-    background: var(--yellow);
-    box-shadow: 0 0 0 0 rgba(255,201,60,0.6);
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse{
-    0%{ box-shadow: 0 0 0 0 rgba(255,201,60,0.55); }
-    70%{ box-shadow: 0 0 0 10px rgba(255,201,60,0); }
-    100%{ box-shadow: 0 0 0 0 rgba(255,201,60,0); }
-  }
-  .featured h2{
-    font-size: clamp(1.25rem, 2.6vw, 1.6rem);
-    font-weight: 700;
-    margin-top: 12px;
-    color: var(--white);
-  }
-  .featured p{
-    max-width: 420px;
-    color: rgba(255,255,255,0.92);
-    font-size: 0.92rem;
-    margin-top: 10px;
-  }
-  .featured-badge{
-    display:inline-flex;
-    flex-direction: column;
-    align-items:flex-start;
-    gap: 2px;
-    background: var(--white);
-    border-radius: 14px;
-    padding: 10px 16px;
-    margin-top: 16px;
-  }
-  .featured-badge .num{
-    font-family: 'Fredoka', sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.3rem, 2.6vw, 1.6rem);
-    color: var(--featured-accent-dark, var(--orange-dark));
-    line-height: 1;
-  }
-  .featured-badge .lbl{
-    font-size: 0.76rem;
-    font-weight: 700;
-    color: #5B6763;
-  }
   .cta{
-    margin-top: 26px;
     display:inline-flex;
     align-items:center;
     gap:10px;
-    background: var(--orange);
+    background: var(--primary);
     color: var(--white);
     font-weight: 700;
-    font-family: 'Fredoka', sans-serif;
-    padding: 15px 26px;
-    border-radius: 100px;
+    font-family: 'Manrope', sans-serif;
+    padding: 14px 24px;
+    border-radius: 12px;
     text-decoration:none;
-    font-size: 1.02rem;
-    transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
-    box-shadow: 0 10px 22px -8px rgba(232,95,34,0.55);
+    font-size: 0.98rem;
+    transition: transform .16s ease, background .16s ease, box-shadow .16s ease;
+    box-shadow: 0 10px 22px -10px color-mix(in srgb, var(--primary) 65%, transparent);
+    border: none;
+    cursor: pointer;
   }
-  .cta:hover{ background: var(--orange-dark); transform: translateY(-2px); }
-  .cta:focus-visible{ outline: 3px solid var(--yellow); outline-offset: 3px; }
-  .cta svg{ width:18px; height:18px; }
+  .cta:hover{ background: var(--primary-dark); transform: translateY(-1px); }
+  .cta:focus-visible{ outline: 3px solid var(--primary); outline-offset: 3px; }
+  .cta svg{ width:17px; height:17px; }
 
-  .cta-light{
-    background: var(--white);
-    color: var(--featured-accent-dark, var(--orange-dark));
-    box-shadow: none;
+  .hero-note{
+    font-size: 0.88rem;
+    color: var(--ink-faint);
   }
-  .cta-light:hover{ background: #FFF3EA; }
-  .cta-light:focus-visible{ outline: 3px solid var(--white); outline-offset: 3px; }
+
+  /* ---------- FEATURED BANNER — signature element, redesigned ---------- */
+  .featured{
+    margin-top: 36px;
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--muted-border);
+    border-left: 4px solid var(--featured-accent, var(--primary));
+    border-radius: 14px;
+    padding: 24px 26px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  @media (min-width: 700px){
+    .featured{
+      grid-template-columns: auto 1fr auto;
+      padding: 22px 28px;
+      gap: 28px;
+    }
+  }
+  .featured-tag{
+    display:inline-flex;
+    align-items:center;
+    gap: 7px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--featured-accent, var(--primary));
+  }
+  .featured-tag .dot{
+    width:6px; height:6px; border-radius:50%;
+    background: var(--featured-accent, var(--primary));
+  }
+  .featured-body h2{
+    font-size: 1.14rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 6px;
+  }
+  .featured-body p{
+    margin-top: 6px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    max-width: 480px;
+  }
+  .featured-stat{
+    text-align: left;
+    white-space: nowrap;
+  }
+  @media (min-width: 700px){
+    .featured-stat{ text-align: right; }
+  }
+  .featured-stat .num{
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--featured-accent, var(--primary));
+    line-height: 1;
+    display:block;
+  }
+  .featured-stat .lbl{
+    font-size: 0.76rem;
+    color: var(--ink-faint);
+    display:block;
+    margin-top: 4px;
+  }
+  .featured-cta{
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 4px;
+  }
+  @media (min-width: 700px){
+    .featured-cta{
+      grid-column: auto;
+      justify-self: end;
+      margin-top: 0;
+    }
+  }
+  .featured-cta .cta{
+    padding: 11px 20px;
+    font-size: 0.9rem;
+    box-shadow: none;
+    background: var(--featured-accent, var(--primary));
+  }
+  .featured-cta .cta:hover{ filter: brightness(0.92); }
 
   /* ---------- STATS STRIP ---------- */
   .stats{
-    padding: 8px 0 44px;
+    padding: 44px 0 40px;
   }
   .stats .wrap{
     display:flex;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 12px;
   }
   .stat-pill{
     display:flex;
@@ -336,21 +337,21 @@
     gap: 10px;
     background: var(--bg-soft);
     border: 1px solid var(--muted-border);
-    border-radius: 100px;
-    padding: 10px 18px 10px 14px;
+    border-radius: 12px;
+    padding: 12px 16px;
   }
   .stat-pill .stat-icon{
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    background: var(--teal-tint);
-    color: var(--teal-dark);
+    width: 32px; height: 32px;
+    border-radius: 9px;
+    background: var(--primary-tint);
+    color: var(--primary-dark);
     display:flex; align-items:center; justify-content:center;
     flex-shrink: 0;
   }
   .stat-pill .stat-icon svg{ width: 16px; height: 16px; }
   .stat-pill strong{
-    font-family: 'Fredoka', sans-serif;
-    font-size: 0.94rem;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9rem;
     color: var(--ink);
     display:block;
   }
@@ -375,22 +376,22 @@
     background: var(--muted-border);
   }
   .category-label h3{
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--ink-soft);
+    color: var(--ink-faint);
     white-space: nowrap;
   }
   /* ---------- SECTION HEADINGS ---------- */
-  .section{ padding: 56px 0; }
+  .section{ padding: 52px 0; }
   .section-head{ max-width: 560px; margin-bottom: 30px; }
   .section-head h2{
-    font-size: clamp(1.5rem, 3vw, 1.9rem);
+    font-size: clamp(1.4rem, 2.6vw, 1.7rem);
     color: var(--ink);
   }
   .section-head p{
-    margin-top: 10px;
+    margin-top: 8px;
     color: var(--ink-soft);
   }
 
@@ -398,7 +399,7 @@
   .grid{
     display:grid;
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
   }
   @media (min-width: 640px){
     .grid{ grid-template-columns: 1fr 1fr; }
@@ -408,61 +409,57 @@
     border: 1px solid var(--muted-border);
     background: var(--surface);
     border-radius: var(--radius);
-    padding: 22px;
+    padding: 20px;
     position: relative;
     text-decoration: none;
     display: block;
-    border-top: 4px solid var(--card-accent, var(--teal));
-    box-shadow: var(--shadow);
-    transition: transform .18s ease, box-shadow .18s ease;
+    border-top: 3px solid var(--card-accent, var(--primary));
+    transition: box-shadow .16s ease, transform .16s ease, border-color .16s ease;
   }
-  .card-live:hover{ transform: translateY(-3px); }
-  .card-live:focus-visible{ outline: 3px solid var(--card-accent, var(--teal)); outline-offset: 2px; }
+  .card-live:hover{ box-shadow: var(--shadow); transform: translateY(-2px); }
+  .card-live:focus-visible{ outline: 3px solid var(--card-accent, var(--primary)); outline-offset: 2px; }
   .badge-live{
     display:inline-flex;
     align-items:center;
     gap: 6px;
-    font-size: 0.72rem;
-    font-weight: 800;
+    font-size: 0.7rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--card-accent, var(--teal));
-    background: color-mix(in srgb, var(--card-accent, var(--teal)) 12%, white);
-    padding: 4px 10px;
-    border-radius: 100px;
+    letter-spacing: 0.04em;
+    color: var(--card-accent, var(--primary));
     margin-bottom: 12px;
   }
   .badge-live .dot{
-    width:6px; height:6px; border-radius:50%;
-    background: var(--card-accent, var(--teal));
+    width:5px; height:5px; border-radius:50%;
+    background: var(--card-accent, var(--primary));
   }
   .card-live h3{
-    font-size: 1.12rem;
+    font-size: 1.05rem;
     color: var(--ink);
   }
   .card-live p{
     margin-top: 8px;
-    font-size: 0.94rem;
+    font-size: 0.9rem;
     color: var(--ink-soft);
   }
   .card-live .icon-badge{
-    width: 46px; height: 46px;
-    border-radius: 14px;
-    background: color-mix(in srgb, var(--card-accent, var(--teal)) 14%, white);
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--card-accent, var(--primary)) 10%, var(--bg-soft));
     display:flex; align-items:center; justify-content:center;
     margin-bottom: 14px;
   }
   .card-live .icon{
-    width: 24px;
-    height: 24px;
-    color: var(--card-accent, var(--teal));
+    width: 21px;
+    height: 21px;
+    color: var(--card-accent, var(--primary));
     margin-bottom: 0;
   }
   .card-live .go{
     margin-top: 14px;
-    font-size: 0.85rem;
+    font-size: 0.83rem;
     font-weight: 700;
-    color: var(--card-accent, var(--teal));
+    color: var(--card-accent, var(--primary));
   }
 
   /* ---------- FERRAMENTAS (quieter) ---------- */
@@ -471,18 +468,18 @@
     border-top: 1px solid var(--muted-border);
     border-bottom: 1px solid var(--muted-border);
   }
-  .tools .section-head h2{ color: var(--teal-dark); }
+  .tools .section-head h2{ color: var(--ink); }
   .tools-grid{
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 18px;
+    gap: 16px;
   }
   .tool-card{
     background: var(--surface);
     border: 1px solid var(--muted-border);
-    border-radius: 16px;
-    padding: 22px 26px;
+    border-radius: 14px;
+    padding: 20px 24px;
     text-decoration:none;
     color: var(--ink);
     display:flex;
@@ -490,20 +487,20 @@
     gap: 16px;
     max-width: 420px;
     width: 100%;
-    transition: box-shadow .18s ease, transform .18s ease;
+    transition: box-shadow .16s ease, transform .16s ease;
   }
   .tool-card:hover{ box-shadow: var(--shadow); transform: translateY(-2px); }
-  .tool-card:focus-visible{ outline: 3px solid var(--teal); outline-offset: 2px; }
+  .tool-card:focus-visible{ outline: 3px solid var(--primary); outline-offset: 2px; }
   .tool-card::before{
     content: attr(data-badge);
     flex-shrink: 0;
-    width: 48px; height: 48px;
-    border-radius: 14px;
-    background: var(--badge-bg, #16A34A);
+    width: 44px; height: 44px;
+    border-radius: 11px;
+    background: var(--badge-bg, var(--primary));
     color: #fff;
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -511,49 +508,49 @@
 
   .tool-card-text{ flex: 1; }
   .tool-card h3{
-    font-size: 1rem;
-    color: var(--teal-dark);
+    font-size: 0.98rem;
+    color: var(--ink);
   }
   .tool-card p{
     margin-top: 6px;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     color: var(--ink-soft);
   }
   .tool-card .arrow{
     margin-top: 12px;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    color: var(--orange-dark);
+    color: var(--primary-dark);
   }
 
   /* ---------- FOOTER ---------- */
   footer{
-    padding: 50px 0 40px;
+    padding: 46px 0 36px;
     border-top: 1px solid var(--muted-border);
-    margin-top: 20px;
+    margin-top: 16px;
   }
   .footer-grid{
     display:grid;
     grid-template-columns: 1fr;
     gap: 32px;
-    padding-bottom: 34px;
+    padding-bottom: 32px;
   }
   @media (min-width: 720px){
     .footer-grid{ grid-template-columns: 1.4fr 1fr 1fr; }
   }
   .footer-brand p{
     margin-top: 12px;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--ink-soft);
     max-width: 280px;
   }
   .footer-col h4{
-    font-family: 'Fredoka', sans-serif;
-    font-size: 0.8rem;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.76rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--ink-soft);
+    color: var(--ink-faint);
     margin-bottom: 14px;
   }
   .footer-col ul{
@@ -564,19 +561,19 @@
     gap: 10px;
   }
   .footer-col a{
-    font-size: 0.9rem;
-    color: var(--ink);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
     text-decoration: none;
   }
-  .footer-col a:hover{ color: var(--teal-dark); }
+  .footer-col a:hover{ color: var(--primary-dark); }
   .footer-bottom{
     border-top: 1px solid var(--muted-border);
-    padding-top: 24px;
+    padding-top: 22px;
     text-align: center;
   }
   .footer-bottom p{
-    font-size: 0.82rem;
-    color: var(--ink-soft);
+    font-size: 0.8rem;
+    color: var(--ink-faint);
   }
 </style>
 </head>
@@ -597,41 +594,33 @@
 
 <section class="hero">
   <div class="wrap">
-    <div>
-      <h1>Será que existe um <span>dinheiro seu</span><br>parado esperando você?</h1>
-      <p class="hero-sub">Todo ano, milhões de brasileiros deixam benefícios sem resgatar — simplesmente porque não sabiam que tinham direito. Aqui você descobre quais são os seus, de graça e sem burocracia.</p>
-      <a class="cta hero-cta" href="#featured" id="heroCta">
+    <span class="eyebrow"><span class="dot"></span> Consulta gratuita e sem cadastro</span>
+    <h1>Será que existe um <span>dinheiro seu</span> parado esperando você?</h1>
+    <p class="hero-sub">Todo ano, milhões de brasileiros deixam benefícios sem resgatar — simplesmente porque não sabiam que tinham direito. Aqui você descobre quais são os seus, de graça e sem burocracia.</p>
+    <div class="hero-actions">
+      <a class="cta" href="#featured" id="heroCta">
         <span id="heroCtaText">Consultar meu PIS/Pasep</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
+      <span class="hero-note">Direto no navegador, sem instalar nada</span>
     </div>
 
     <div class="featured" id="featured">
-      <div class="featured-top">
-        <div>
-          <span class="featured-eyebrow"><span class="pulse"></span> <span id="featuredEyebrow">Disponível agora</span></span>
-          <h2 id="featuredTitle">Abono Salarial PIS/Pasep 2026</h2>
-          <p id="featuredDesc">Se você trabalhou com carteira assinada em 2024, pode ter um valor te esperando. Descubra em segundos se você tem direito, o calendário de pagamento e como sacar.</p>
-          <div class="featured-badge">
-            <span class="num" id="featuredNum">R$ 1.621</span>
-            <span class="lbl" id="featuredLbl">valor máximo do benefício</span>
-          </div>
-        </div>
-        <div class="featured-icon" id="featuredIcon">
-          <svg viewBox="0 0 200 200" fill="none">
-            <circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/>
-            <rect x="46" y="70" width="108" height="80" rx="14" fill="#FFFFFF"/>
-            <rect x="46" y="70" width="108" height="26" rx="14" fill="#FFC93C"/>
-            <circle cx="100" cy="112" r="18" fill="#FF7A3D"/>
-            <path d="M60 70 L100 38 L140 70" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </svg>
-        </div>
+      <div class="featured-body">
+        <span class="featured-tag"><span class="dot"></span> <span id="featuredEyebrow">Benefício em destaque</span></span>
+        <h2 id="featuredTitle">Abono Salarial PIS/Pasep 2026</h2>
+        <p id="featuredDesc">Se você trabalhou com carteira assinada em 2024, pode ter um valor te esperando. Descubra em segundos se você tem direito, o calendário de pagamento e como sacar.</p>
       </div>
-
-      <a class="cta cta-light" href="/abono/" id="featuredCta" aria-label="Consultar" style="margin-top:18px;">
-        <span id="featuredCtaText">Consultar agora</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+      <div class="featured-stat">
+        <span class="num" id="featuredNum">R$ 1.621</span>
+        <span class="lbl" id="featuredLbl">valor máximo do benefício</span>
+      </div>
+      <div class="featured-cta">
+        <a class="cta" href="/abono/" id="featuredCta" aria-label="Consultar">
+          <span id="featuredCtaText">Consultar agora</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -640,7 +629,7 @@
   <div class="wrap">
     <div class="stat-pill">
       <span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
-      <div><strong>10 benefícios</strong><span>calculadoras disponíveis</span></div>
+      <div><strong>15 benefícios</strong><span>calculadoras disponíveis</span></div>
     </div>
     <div class="stat-pill">
       <span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
@@ -678,6 +667,14 @@
           <p>1 salário mínimo por mês pra idosos e pessoas com deficiência de baixa renda.</p>
           <div class="go">Consultar →</div>
         </a>
+
+        <a class="card-live" href="/pensao-por-morte/" style="--card-accent:#475569">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg></div>
+          <span class="badge-live"><span class="dot"></span> Disponível</span>
+          <h3>Pensão por Morte</h3>
+          <p>Valor estimado pra dependentes de segurados do INSS que faleceram.</p>
+          <div class="go">Consultar →</div>
+        </a>
       </div>
     </div>
 
@@ -705,6 +702,38 @@
           <span class="badge-live"><span class="dot"></span> Disponível</span>
           <h3>Abono de Permanência</h3>
           <p>Para servidores públicos que já podem se aposentar mas decidiram continuar.</p>
+          <div class="go">Consultar →</div>
+        </a>
+
+        <a class="card-live" href="/salario-maternidade/" style="--card-accent:#E11D48">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 2.5 5 6 5c2 0 3.5 1.3 4 2.5C10.5 6.3 12 5 14 5c3.5 0 5.5 3.5 3.5 7.5C15 16.65 12 21 12 21Z"/></svg></div>
+          <span class="badge-live"><span class="dot"></span> Disponível</span>
+          <h3>Salário-Maternidade</h3>
+          <p>Valor estimado do benefício, seja você CLT, doméstica, autônoma ou rural.</p>
+          <div class="go">Consultar →</div>
+        </a>
+
+        <a class="card-live" href="/auxilio-doenca/" style="--card-accent:#0EA5E9">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <span class="badge-live"><span class="dot"></span> Disponível</span>
+          <h3>Auxílio-Doença</h3>
+          <p>Estimativa do benefício por incapacidade temporária, se você está afastado.</p>
+          <div class="go">Consultar →</div>
+        </a>
+
+        <a class="card-live" href="/salario-familia/" style="--card-accent:#65A30D">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <span class="badge-live"><span class="dot"></span> Disponível</span>
+          <h3>Salário-Família</h3>
+          <p>Cota mensal por filho até 14 anos, pra quem tem carteira assinada.</p>
+          <div class="go">Consultar →</div>
+        </a>
+
+        <a class="card-live" href="/rescisao-trabalhista/" style="--card-accent:#9333EA">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v5a2 2 0 0 0 2 2h5M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 15h6M9 11h3"/></svg></div>
+          <span class="badge-live"><span class="dot"></span> Disponível</span>
+          <h3>Rescisão Trabalhista</h3>
+          <p>Verbas rescisórias: saldo, 13º, férias, aviso prévio e multa do FGTS.</p>
           <div class="go">Consultar →</div>
         </a>
       </div>
@@ -790,11 +819,16 @@
           <li><a href="/fgts/">FGTS</a></li>
           <li><a href="/seguro-desemprego/">Seguro-Desemprego</a></li>
           <li><a href="/bpc-loas/">BPC/LOAS</a></li>
+          <li><a href="/salario-maternidade/">Salário-Maternidade</a></li>
+          <li><a href="/auxilio-doenca/">Auxílio-Doença</a></li>
+          <li><a href="/salario-familia/">Salário-Família</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Mais benefícios</h4>
         <ul>
+          <li><a href="/pensao-por-morte/">Pensão por Morte</a></li>
+          <li><a href="/rescisao-trabalhista/">Rescisão Trabalhista</a></li>
           <li><a href="/abono-permanencia/">Abono de Permanência</a></li>
           <li><a href="/pe-de-meia/">Pé-de-Meia</a></li>
           <li><a href="/tarifa-social-energia/">Tarifa Social de Energia</a></li>
@@ -838,105 +872,128 @@
         titulo: "Abono Salarial PIS/Pasep 2026",
         desc: "Se você trabalhou com carteira assinada em 2024, pode ter um valor te esperando. Descubra o calendário e como sacar.",
         num: "R$ 1.621", lbl: "valor máximo do benefício",
-        accent: "#FF7A3D", accentDark: "#E85F22",
-        icone: '<circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/><rect x="46" y="70" width="108" height="80" rx="14" fill="#FFFFFF"/><rect x="46" y="70" width="108" height="26" rx="14" fill="#FFC93C"/><circle cx="100" cy="112" r="18" fill="#FF7A3D"/><path d="M60 70 L100 38 L140 70" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+        accent: "#0F6D5C"
       },
       {
         slug: "bolsa-familia", nome: "Bolsa Família",
         titulo: "Bolsa Família 2026",
         desc: "Veja se sua família tem direito ao benefício e qual valor pode receber, considerando a Regra de Proteção.",
         num: "R$ 600+", lbl: "valor base mensal",
-        accent: "#2E6FF2", accentDark: "#1D4FBF",
-        icone: '<circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/><circle cx="80" cy="72" r="22" fill="#FFFFFF"/><path d="M40 156c0-30 22-46 40-46s40 16 40 46" fill="#FFFFFF"/><circle cx="132" cy="86" r="16" fill="#FFC93C"/><path d="M104 156c2-22 16-34 28-34s26 10 28 30" fill="#FFC93C"/>'
+        accent: "#2E6FF2"
       },
       {
         slug: "fgts", nome: "FGTS",
         titulo: "FGTS Saque-Aniversário 2026",
         desc: "Calcule quanto você pode sacar do FGTS com base no seu saldo, e a janela pelo mês de nascimento.",
         num: "até 50%", lbl: "do saldo pra sacar",
-        accent: "#7C3AED", accentDark: "#5B21B6",
-        icone: '<circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/><rect x="42" y="66" width="116" height="76" rx="12" fill="#FFFFFF"/><rect x="42" y="66" width="116" height="22" rx="12" fill="#FFC93C"/><rect x="58" y="104" width="30" height="10" rx="5" fill="#7C3AED"/>'
+        accent: "#7C3AED"
       },
       {
         slug: "seguro-desemprego", nome: "Seguro-Desemprego",
         titulo: "Seguro-Desemprego 2026",
         desc: "Calcule o valor da parcela e quantos meses de seguro-desemprego você tem direito.",
         num: "5 parcelas", lbl: "no valor máximo",
-        accent: "#0891B2", accentDark: "#0E6478",
-        icone: '<circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/><circle cx="100" cy="100" r="52" fill="#FFFFFF"/><path d="M100 74v28l20 16" stroke="#0891B2" stroke-width="9" stroke-linecap="round" fill="none"/>'
+        accent: "#0891B2"
       },
       {
         slug: "abono-permanencia", nome: "Abono de Permanência",
         titulo: "Abono de Permanência 2026",
         desc: "Servidor público que já pode se aposentar mas decidiu continuar? Veja se você tem direito.",
         num: "11 a 14%", lbl: "a mais no salário",
-        accent: "#DB2777", accentDark: "#9D174D",
-        icone: '<circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/><circle cx="94" cy="100" r="46" fill="#FFFFFF"/><path d="M126 74v22h22" stroke="#DB2777" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+        accent: "#DB2777"
       },
       {
         slug: "pe-de-meia", nome: "Pé-de-Meia",
         titulo: "Pé-de-Meia 2026",
         desc: "A poupança educacional do ensino médio público. Veja quanto seu filho pode acumular.",
         num: "R$ 9.200", lbl: "possíveis no ensino médio",
-        accent: "#16A34A", accentDark: "#15803D",
-        icone: '<circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/><path d="M100 50 40 82l60 32 60-32Z" fill="#FFFFFF"/><path d="M64 96v28c0 10 16 18 36 18s36-8 36-18V96" stroke="#FFFFFF" stroke-width="9" fill="none" stroke-linecap="round"/>'
+        accent: "#16A34A"
       },
       {
         slug: "bpc-loas", nome: "BPC/LOAS",
         titulo: "BPC/LOAS 2026",
         desc: "1 salário mínimo por mês pra idosos ou pessoas com deficiência de baixa renda, sem precisar do INSS.",
         num: "R$ 1.621", lbl: "por mês, sem contribuir",
-        accent: "#4338CA", accentDark: "#312E81",
-        icone: '<circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/><circle cx="100" cy="76" r="24" fill="#FFFFFF"/><path d="M56 156c0-26 20-40 44-40s44 14 44 40" fill="#FFFFFF"/>'
+        accent: "#4338CA"
       },
       {
         slug: "tarifa-social-energia", nome: "Tarifa Social",
         titulo: "Tarifa Social de Energia 2026",
         desc: "Veja se você tem direito a desconto ou isenção total na conta de luz.",
         num: "até 100%", lbl: "de desconto na conta",
-        accent: "#D97706", accentDark: "#92400E",
-        icone: '<circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/><path d="M108 46 58 112h34l-8 42 50-66h-34Z" fill="#FFFFFF"/>'
+        accent: "#D97706"
       },
       {
         slug: "auxilio-gas", nome: "Auxílio-Gás",
         titulo: "Auxílio-Gás dos Brasileiros 2026",
         desc: "Ajuda bimestral pra comprar o botijão de gás. Veja se sua família está na prioridade.",
         num: "R$ 100+", lbl: "a cada 2 meses",
-        accent: "#DC2626", accentDark: "#991B1B",
-        icone: '<circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/><path d="M100 46c8 24-24 32-24 64a24 24 0 0 0 48 0c0-8-8-16-8-24 16 8 24 24 24 40a40 40 0 0 1-80 0c0-40 40-48 40-80Z" fill="#FFFFFF"/>'
+        accent: "#DC2626"
       },
       {
         slug: "id-jovem", nome: "ID Jovem",
         titulo: "ID Jovem 2026",
         desc: "Passagem interestadual grátis e meia-entrada pra quem tem entre 15 e 29 anos.",
         num: "2 grátis", lbl: "por viagem interestadual",
-        accent: "#0D9488", accentDark: "#115E59",
-        icone: '<circle cx="100" cy="100" r="92" fill="rgba(255,255,255,0.12)"/><rect x="52" y="88" width="96" height="64" rx="16" fill="#FFFFFF"/><path d="M76 88V64a24 24 0 0 1 48 0v24" stroke="#FFFFFF" stroke-width="9" fill="none"/>'
+        accent: "#0D9488"
+      },
+      {
+        slug: "salario-maternidade", nome: "Salário-Maternidade",
+        titulo: "Salário-Maternidade 2026",
+        desc: "Calcule o valor estimado, seja você CLT, doméstica, autônoma, facultativa ou rural.",
+        num: "120 dias", lbl: "de duração do benefício",
+        accent: "#E11D48"
+      },
+      {
+        slug: "auxilio-doenca", nome: "Auxílio-Doença",
+        titulo: "Auxílio-Doença 2026",
+        desc: "Se você está afastado por doença ou acidente, veja o valor estimado do seu benefício.",
+        num: "91%", lbl: "da média salarial",
+        accent: "#0EA5E9"
+      },
+      {
+        slug: "salario-familia", nome: "Salário-Família",
+        titulo: "Salário-Família 2026",
+        desc: "Cota mensal por filho até 14 anos pra quem tem carteira assinada e ganha até o limite.",
+        num: "R$ 67,54", lbl: "por filho, todo mês",
+        accent: "#65A30D"
+      },
+      {
+        slug: "pensao-por-morte", nome: "Pensão por Morte",
+        titulo: "Pensão por Morte 2026",
+        desc: "Estimativa do valor pra dependentes de segurados do INSS que faleceram.",
+        num: "50%+", lbl: "do valor base, por dependente",
+        accent: "#475569"
+      },
+      {
+        slug: "rescisao-trabalhista", nome: "Rescisão Trabalhista",
+        titulo: "Rescisão Trabalhista 2026",
+        desc: "Calcule saldo, 13º e férias proporcionais, aviso prévio e multa do FGTS na demissão.",
+        num: "10 dias", lbl: "prazo pra empresa pagar",
+        accent: "#9333EA"
       }
     ];
 
-    function getWeekIndex(){
+    function getDayIndex(){
       var d = new Date();
       var start = new Date(d.getFullYear(), 0, 1);
       var diff = (d - start) / 86400000;
-      var week = Math.floor(diff / 7);
-      return week % BENEFICIOS.length;
+      var day = Math.floor(diff);
+      return day % BENEFICIOS.length;
     }
 
-    var b = BENEFICIOS[getWeekIndex()];
+    var b = BENEFICIOS[getDayIndex()];
 
     document.getElementById('featuredTitle').textContent = b.titulo;
     document.getElementById('featuredDesc').textContent = b.desc;
     document.getElementById('featuredNum').textContent = b.num;
     document.getElementById('featuredLbl').textContent = b.lbl;
-    document.getElementById('featuredIcon').innerHTML = '<svg viewBox="0 0 200 200" fill="none">' + b.icone + '</svg>';
     document.getElementById('heroCtaText').textContent = 'Consultar ' + b.nome;
     document.getElementById('featuredCta').href = '/' + b.slug + '/';
     document.getElementById('featuredCta').setAttribute('aria-label', 'Consultar ' + b.nome);
 
     var card = document.getElementById('featured');
     card.style.setProperty('--featured-accent', b.accent);
-    card.style.setProperty('--featured-accent-dark', b.accentDark);
   })();
 </script>
 </body>
