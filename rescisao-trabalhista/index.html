@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#9333EA">
+<title>Rescisão Trabalhista 2026 — Calculadora | Tem Direito?</title>
+<meta name="description" content="Calcule o valor estimado das verbas rescisórias em 2026: saldo de salário, 13º e férias proporcionais, aviso prévio e multa do FGTS.">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back-link" href="/">← Tem Direito?</a>
+    <div class="header-right"><div class="logo-mark">Rescisão Trabalhista</div><button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro ou escuro" type="button">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+      </button></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Consulta gratuita</span>
+    <h1>Quanto você tem a receber na rescisão do contrato?</h1>
+    <p>Saldo de salário, 13º e férias proporcionais, aviso prévio e multa do FGTS variam bastante conforme o tipo de desligamento. Calcule uma estimativa antes de assinar o termo de rescisão.</p>
+  </section>
+
+  <section class="calc-card" id="calc">
+    <h2>Calculadora de verbas rescisórias</h2>
+    <div class="calc-sub">Baseado na CLT e nas regras vigentes em 2026.</div>
+
+    <div class="field">
+      <label for="salario">Seu salário mensal bruto (R$)</label>
+      <input type="number" id="salario" inputmode="decimal" placeholder="Ex: 3200">
+    </div>
+
+    <div class="field-row two">
+      <div class="field">
+        <label for="admissao">Data de admissão</label>
+        <input type="date" id="admissao">
+      </div>
+      <div class="field">
+        <label for="demissao">Data de demissão</label>
+        <input type="date" id="demissao">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="tipo">Tipo de desligamento</label>
+      <select id="tipo" onchange="atualizarCampos()">
+        <option value="sem_justa_causa">Dispensa sem justa causa</option>
+        <option value="pedido_demissao">Pedido de demissão</option>
+        <option value="justa_causa">Dispensa por justa causa</option>
+        <option value="indireta">Rescisão indireta (culpa do empregador)</option>
+        <option value="acordo">Acordo entre as partes (art. 484-A)</option>
+      </select>
+    </div>
+
+    <div class="field-row two">
+      <div class="field">
+        <label for="feriasVencidas">Períodos de férias vencidas não gozadas</label>
+        <input type="number" id="feriasVencidas" inputmode="numeric" placeholder="Ex: 0" value="0">
+      </div>
+      <div class="field" id="fgtsField">
+        <label for="saldoFgts">Saldo do FGTS depositado (R$)</label>
+        <input type="number" id="saldoFgts" inputmode="decimal" placeholder="Ex: 4500">
+      </div>
+    </div>
+    <div class="field-hint">O saldo do FGTS só é usado pra calcular a multa (40% ou 20%). Consulte no app FGTS ou no extrato da Caixa.</div>
+
+    <button class="btn" onclick="calcular()">Calcular</button>
+
+    <div class="result" id="resultado">
+      <div class="r-label" id="r-label">Resultado</div>
+      <div class="r-value" id="r-value">—</div>
+      <div class="r-note" id="r-note"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>O que muda por tipo de desligamento</h2>
+    <div class="info-grid">
+      <div class="info-item"><div class="n">Sem justa causa</div><p>Direito a tudo: saldo, 13º e férias proporcionais, aviso prévio, férias vencidas, multa de 40% do FGTS e saque do saldo.</p></div>
+      <div class="info-item"><div class="n">Pedido de demissão</div><p>Direito a saldo, 13º e férias proporcionais e vencidas — mas sem aviso prévio do empregador e sem multa do FGTS.</p></div>
+      <div class="info-item"><div class="n">Justa causa</div><p>Só saldo de salário e férias vencidas (se houver). Perde 13º e férias proporcionais e não há multa do FGTS.</p></div>
+      <div class="info-item"><div class="n">Acordo (art. 484-A)</div><p>Aviso prévio pela metade, multa de 20% do FGTS, e saque de até 80% do saldo — mas sem direito ao seguro-desemprego.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Prazo pra pagar e homologação</h2>
+    <p>A empresa tem até <strong>10 dias corridos</strong> a partir do término do contrato (ou do fim do aviso prévio) pra efetuar o pagamento das verbas rescisórias, sob pena de multa. Desde a Reforma Trabalhista de 2017, a homologação sindical deixou de ser obrigatória, mas ainda é recomendável revisar o Termo de Rescisão (TRCT) com cuidado antes de assinar.</p>
+  </section>
+
+  <section class="section">
+    <h2>Perguntas frequentes</h2>
+    <details>
+      <summary>O aviso prévio conta pra tempo de serviço e para o cálculo do 13º e férias?</summary>
+      <p>Sim, quando é indenizado, o período do aviso prévio se projeta e conta como tempo de serviço para todos os efeitos legais — inclusive para aumentar a fração de 13º e férias. Esta calculadora usa a data efetiva de demissão informada; se quiser, projete manualmente somando os dias de aviso a essa data para uma estimativa mais completa.</p>
+    </details>
+    <details>
+      <summary>Posso sacar o FGTS em qualquer tipo de desligamento?</summary>
+      <p>Não. Em pedido de demissão e justa causa, o saque integral do FGTS não é liberado (só situações específicas, como saque-aniversário se aderido). Em dispensa sem justa causa, rescisão indireta e acordo, o saque é liberado (100% ou 80%, respectivamente).</p>
+    </details>
+    <details>
+      <summary>Tenho direito ao seguro-desemprego em qualquer caso?</summary>
+      <p>Só em dispensa sem justa causa ou rescisão indireta, cumprindo os requisitos de tempo trabalhado. Pedido de demissão, justa causa e acordo (484-A) não dão direito ao seguro-desemprego.</p>
+    </details>
+    <details>
+      <summary>O que é rescisão indireta?</summary>
+      <p>É quando o empregado pede a rescisão por culpa do empregador (atraso salarial, assédio, condições degradantes etc). Se reconhecida (geralmente por acordo ou decisão judicial), tem os mesmos direitos de uma dispensa sem justa causa.</p>
+    </details>
+
+    <div class="disclaimer">
+      <strong>Aviso:</strong> cálculo baseado na CLT (arts. 477 a 487) e na Lei 13.467/2017 (Reforma Trabalhista). O resultado é uma estimativa simplificada — não considera adicionais (insalubridade, periculosidade, horas extras habituais), descontos (INSS, IRRF, faltas) nem a projeção do aviso prévio no tempo de serviço. Para o valor exato, revise o Termo de Rescisão com um advogado antes de assinar.
+    </div>
+  </section>
+</main>
+
+<section class="app-promo">
+  <div class="wrap">
+    <div class="app-promo-label">Organize sua vida financeira</div>
+    <a class="app-promo-card" href="/meu-bolso/">
+      <div class="app-promo-icon">MB</div>
+      <div class="app-promo-text">
+        <h3>Meu Bolso</h3>
+        <p>Controle seus gastos por categoria, no modelo de envelopes digitais.</p>
+      </div>
+      <svg class="app-promo-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Parte do <a href="/">Tem Direito?</a> · <a href="privacy.html">Política de Privacidade</a></p>
+    <p>© 2026 · consultarbeneficios.com.br</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+  (function(){
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var saved = localStorage.getItem('temdireito-theme');
+    if(saved === 'dark'){ root.setAttribute('data-theme', 'dark'); }
+    if(toggle){
+      toggle.addEventListener('click', function(){
+        var isDark = root.getAttribute('data-theme') === 'dark';
+        if(isDark){
+          root.removeAttribute('data-theme');
+          localStorage.setItem('temdireito-theme', 'light');
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          localStorage.setItem('temdireito-theme', 'dark');
+        }
+      });
+    }
+    atualizarCampos();
+  })();
+</script>
+</body>
+</html>
