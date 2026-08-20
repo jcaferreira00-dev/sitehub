@@ -1197,11 +1197,24 @@ if('serviceWorker' in navigator){
 <script>
 document.getElementById('authLoading').classList.add('open');
 
+/* Se o módulo de nuvem (cloud-sync.js) não responder em alguns segundos,
+   para de esperar e segue com o app funcionando localmente (localStorage),
+   em vez de travar no loading pra sempre. */
+var cloudSyncReady = false;
+var cloudSyncFallback = setTimeout(function(){
+  if(cloudSyncReady) return;
+  document.getElementById('authLoading').classList.remove('open');
+  document.getElementById('loginScreen').classList.remove('open');
+  renderGastos(); renderCartoes(); renderOutras(); renderDashboard();
+}, 4000);
+
 function wireCloudSync(){
   if(!window.CloudSync){
     window.addEventListener('cloudsync-pronto', wireCloudSync, {once:true});
     return;
   }
+  cloudSyncReady = true;
+  clearTimeout(cloudSyncFallback);
   document.getElementById('logoutBtn').style.display = 'flex';
 
   window.CloudSync.onAuthStateChanged(async user=>{
