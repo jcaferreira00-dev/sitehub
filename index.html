@@ -116,10 +116,10 @@
   .logo .dot{
     color: var(--primary);
   }
-  .menu-icon{
-    width: 24px; height: 24px;
-    color: var(--ink-soft);
-    cursor: pointer;
+  .logo-icon{
+    width: 22px; height: 22px;
+    color: var(--primary);
+    flex-shrink: 0;
   }
   .header-actions{
     display:flex;
@@ -255,6 +255,11 @@
       gap: 28px;
     }
   }
+  @media (max-width: 480px){
+    .featured{ padding: 18px 18px; gap: 14px; border-radius: 12px; }
+    .featured-body h2{ font-size: 1.02rem; }
+    .featured-body p{ font-size: 0.87rem; }
+  }
   .featured-tag{
     display:inline-flex;
     align-items:center;
@@ -327,9 +332,12 @@
     padding: 44px 0 40px;
   }
   .stats .wrap{
-    display:flex;
-    flex-wrap: wrap;
+    display:grid;
+    grid-template-columns: 1fr;
     gap: 12px;
+  }
+  @media (min-width: 640px){
+    .stats .wrap{ grid-template-columns: repeat(3, 1fr); }
   }
   .stat-pill{
     display:flex;
@@ -358,6 +366,13 @@
   .stat-pill span{
     font-size: 0.78rem;
     color: var(--ink-soft);
+  }
+  @media (max-width: 480px){
+    .stat-pill{ padding: 10px 12px; gap: 8px; }
+    .stat-pill .stat-icon{ width: 28px; height: 28px; }
+    .stat-pill .stat-icon svg{ width: 14px; height: 14px; }
+    .stat-pill strong{ font-size: 0.85rem; }
+    .stat-pill span{ font-size: 0.73rem; }
   }
 
   /* ---------- CATEGORY GROUPS ---------- */
@@ -397,27 +412,36 @@
 
   /* ---------- BENEFÍCIOS GRID ---------- */
   .grid{
-    display:flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  .card-live{
-    flex: 1 1 100%;
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
   @media (min-width: 640px){
-    .card-live{ flex: 1 1 calc(50% - 8px); max-width: calc(50% - 8px); }
+    .grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 900px){
+    .grid{ grid-template-columns: repeat(3, 1fr); gap: 16px; }
   }
 
   .card-live{
     border: 1px solid var(--muted-border);
     background: var(--surface);
     border-radius: var(--radius);
-    padding: 20px;
+    padding: 18px;
     position: relative;
     text-decoration: none;
     display: block;
     border-top: 3px solid var(--card-accent, var(--primary));
     transition: box-shadow .16s ease, transform .16s ease, border-color .16s ease;
+  }
+  @media (max-width: 480px){
+    .card-live{ padding: 14px; border-radius: 12px; }
+    .card-live .icon-badge{ width: 34px; height: 34px; margin-bottom: 10px; }
+    .card-live .icon{ width: 17px; height: 17px; }
+    .card-live h3{ font-size: 0.95rem; }
+    .card-live p{ font-size: 0.85rem; margin-top: 6px; }
+    .card-live .go{ margin-top: 10px; font-size: 0.8rem; }
+    .badge-live{ margin-bottom: 8px; }
   }
   .card-live:hover{ box-shadow: var(--shadow); transform: translateY(-2px); }
   .card-live:focus-visible{ outline: 3px solid var(--card-accent, var(--primary)); outline-offset: 2px; }
@@ -494,6 +518,10 @@
   }
   .tool-card:hover{ box-shadow: var(--shadow); transform: translateY(-2px); }
   .tool-card:focus-visible{ outline: 3px solid var(--primary); outline-offset: 2px; }
+  @media (max-width: 480px){
+    .tool-card{ padding: 16px 18px; gap: 12px; border-radius: 12px; }
+    .tool-card::before{ width: 38px; height: 38px; font-size: 0.85rem; }
+  }
   .tool-card::before{
     content: attr(data-badge);
     flex-shrink: 0;
@@ -584,13 +612,15 @@
 
 <header>
   <div class="wrap">
-    <div class="logo">Tem Direito<span class="dot">?</span></div>
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8"/><path d="M5 7h14M5 7l-3 6a3 3 0 0 0 6 0l-3-6ZM19 7l-3 6a3 3 0 0 0 6 0l-3-6Z"/></svg>
+      Tem Direito<span class="dot">?</span>
+    </div>
     <div class="header-actions">
       <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro ou escuro" type="button">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
       </button>
-      <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </div>
   </div>
 </header>
@@ -811,7 +841,10 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo">Tem Direito<span class="dot">?</span></div>
+        <div class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8"/><path d="M5 7h14M5 7l-3 6a3 3 0 0 0 6 0l-3-6ZM19 7l-3 6a3 3 0 0 0 6 0l-3-6Z"/></svg>
+          Tem Direito<span class="dot">?</span>
+        </div>
         <p>Feito para ajudar o cidadão brasileiro a não deixar dinheiro na mesa. Calculadoras gratuitas, sem cadastro, direto no navegador.</p>
       </div>
       <div class="footer-col">
