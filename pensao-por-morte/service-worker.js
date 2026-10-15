@@ -7,7 +7,7 @@ var ARQUIVOS = [
   "/pensao-por-morte/icons/icon-512.png"
 ];
 
-var CACHE = "pensao-por-morte-v1";
+var CACHE = "pensao-por-morte-v2";
 
 self.addEventListener("install", function(e) {
   e.waitUntil(caches.open(CACHE).then(function(cache) { return cache.addAll(ARQUIVOS); }));
@@ -17,14 +17,22 @@ self.addEventListener("install", function(e) {
 self.addEventListener("activate", function(e) {
   e.waitUntil(
     caches.keys().then(function(keys) {
-      return Promise.all(keys.filter(function(k) { return k !== CACHE; }).map(function(k) { return caches.delete(k); }));
+      return Promise.all(keys.filter(function(k) { return k.indexOf("pensao-por-morte-v") === 0 && k !== CACHE; }).map(function(k) { return caches.delete(k); }));
     })
   );
   self.clients.claim();
 });
 
 self.addEventListener("fetch", function(e) {
+  // rede primeiro: o conteúdo atualizado aparece na hora; o cache só é usado offline
+  if (e.request.method !== "GET") return;
   e.respondWith(
-    caches.match(e.request).then(function(cached) { return cached || fetch(e.request); })
+    fetch(e.request).then(function(resp) {
+      if (resp && resp.ok && new URL(e.request.url).origin === location.origin) {
+        var copia = resp.clone();
+        caches.open(CACHE).then(function(cache) { cache.put(e.request, copia); });
+      }
+      return resp;
+    }).catch(function() { return caches.match(e.request); })
   );
 });

@@ -60,9 +60,9 @@ function calcular(){
 
   if(!carenciaOk){
     box.className = 'result show status-warn';
-    document.getElementById('r-label').textContent = 'Carência não confirmada';
-    document.getElementById('r-value').textContent = 'É preciso comprovar 10 contribuições';
-    document.getElementById('r-note').textContent = 'Nessa categoria, o INSS exige pelo menos 10 contribuições mensais antes do parto (prazo reduzido proporcionalmente em caso de parto antecipado). Sem isso, o pedido tende a ser negado — regularize as contribuições antes de solicitar.';
+    document.getElementById('r-label').textContent = 'Confira a qualidade de segurada';
+    document.getElementById('r-value').textContent = 'Não há mais carência, mas é preciso estar segurada';
+    document.getElementById('r-note').textContent = 'Desde a decisão do STF (ADI 2110), não se exige mais 10 contribuições. Mas é preciso ter a qualidade de segurada e pelo menos uma contribuição paga (na rural, comprovar a atividade). Se você tem isso, marque a opção acima e calcule de novo.';
     return;
   }
 

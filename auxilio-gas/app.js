@@ -1,36 +1,44 @@
 
+var SALARIO_MINIMO = 1621.00;
+
 function calcular(){
   var cadunico = document.getElementById('cadunico').checked;
   var bolsafamilia = document.getElementById('bolsafamilia').checked;
-  var bpc = document.getElementById('bpc').checked;
-  var violencia = document.getElementById('violencia').checked;
+  var cpf = document.getElementById('cpf').checked;
   var renda = parseFloat(document.getElementById('renda').value) || 0;
   var pessoas = parseInt(document.getElementById('pessoas').value) || 0;
   var box = document.getElementById('resultado');
-  box.classList.add('show');
-
-  var perCapita = pessoas > 0 ? renda / pessoas : null;
-  var rendaOk = perCapita !== null && perCapita <= 810.50;
+  var set = function(cls, label, value, note){
+    box.className = 'result show ' + cls;
+    document.getElementById('r-label').textContent = label;
+    document.getElementById('r-value').textContent = value;
+    document.getElementById('r-note').textContent = note;
+  };
 
   if(!cadunico){
-    box.className = 'result show status-warn';
-    document.getElementById('r-label').textContent = 'Passo necessário';
-    document.getElementById('r-value').textContent = 'Atualize o CadÚnico primeiro';
-    document.getElementById('r-note').textContent = 'O Auxílio-Gás depende do Cadastro Único atualizado. Sem isso, nenhuma das outras condições conta.';
+    set('status-warn', 'Passo necessário', 'Atualize o CadÚnico primeiro', 'O Gás do Povo usa o Cadastro Único atualizado nos últimos 24 meses. Procure o CRAS do seu município.');
     return;
   }
-
-  if(bolsafamilia || bpc || violencia || rendaOk){
-    box.className = 'result show status-good';
-    document.getElementById('r-label').textContent = 'Provavelmente elegível';
-    document.getElementById('r-value').textContent = '~R$ 100 a R$ 130 a cada 2 meses';
-    var motivo = bolsafamilia ? 'já recebe o Bolsa Família' : (bpc ? 'tem BPC na família' : (violencia ? 'está em medida protetiva' : 'tem renda per capita dentro do limite'));
-    document.getElementById('r-note').textContent = 'Como sua família ' + motivo + ', você entra no grupo prioritário. A seleção final ainda depende do orçamento de cada bimestre.';
+  if(pessoas < 1){
+    set('status-warn', 'Falta informação', 'Informe o nº de pessoas', 'Preencha a renda e o número de pessoas da família.');
     return;
   }
+  var perCapita = renda / pessoas;
+  var vales = pessoas >= 4 ? 6 : 4;
+  var freq = pessoas >= 4 ? 'um a cada 2 meses' : 'um a cada 3 meses';
 
-  box.className = 'result show status-warn';
-  document.getElementById('r-label').textContent = 'Fora das prioridades atuais';
-  document.getElementById('r-value').textContent = 'Renda acima do limite ou sem prioridade';
-  document.getElementById('r-note').textContent = 'Com base no que você marcou, sua família não está entre as prioridades de seleção hoje. Vale manter o CadÚnico atualizado — os critérios podem mudar a cada bimestre.';
+  if(perCapita > SALARIO_MINIMO / 2){
+    set('status-warn', 'Fora do perfil', 'Renda acima de meio salário mínimo por pessoa', 'Sua renda por pessoa ficou em R$ ' + perCapita.toFixed(2).replace('.', ',') + '. O limite é R$ 810,50 (meio salário mínimo de 2026).');
+    return;
+  }
+  if(pessoas < 2){
+    set('status-warn', 'Fora do perfil atual', 'Famílias de 1 pessoa ainda não entram', 'Hoje o programa atende famílias com 2 ou mais pessoas no mesmo cadastro.');
+    return;
+  }
+  if(!bolsafamilia){
+    set('status-warn', 'Fora do perfil atual', 'Hoje o programa atende famílias do Bolsa Família', 'Sua renda está dentro do limite, mas no momento o Gás do Povo está sendo liberado para famílias do Bolsa Família. Mantenha o CadÚnico atualizado — o público pode ser ampliado.');
+    return;
+  }
+  set('status-good', 'Provavelmente no perfil', vales + ' vales por ano (' + freq + ')',
+    'Cada vale dá direito a uma recarga grátis do botijão de 13 kg numa revenda credenciada.' + (cpf ? '' : ' Atenção: o CPF do responsável familiar precisa estar regular na Receita Federal.') + ' A entrada depende do orçamento do programa — consulte no app Meu Social.');
 }

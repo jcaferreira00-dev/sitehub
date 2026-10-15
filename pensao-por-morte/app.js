@@ -65,7 +65,7 @@ function calcular(){
       duracaoTexto = 'depende da idade do cônjuge/companheiro(a) na data do óbito — informe a idade pra ver o prazo exato';
     }
   } else {
-    duracaoTexto = 'varia conforme o tipo de dependente — consulte o Meu INSS ou um advogado pra confirmar o prazo';
+    duracaoTexto = 'varia conforme o tipo de dependente — consulte o Meu INSS (ou o telefone 135) pra confirmar o prazo';
   }
 
   box.className = 'result show status-good';
