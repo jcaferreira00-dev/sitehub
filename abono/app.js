@@ -1,12 +1,12 @@
 
 var LOTES = [
-  { label: "Janeiro", months: [1], date: "2026-02-15", dateDisplay: "15/02/2026" },
-  { label: "Fevereiro", months: [2], date: "2026-03-15", dateDisplay: "15/03/2026" },
+  { label: "Janeiro", months: [1], date: "2026-02-16", dateDisplay: "16/02/2026" },
+  { label: "Fevereiro", months: [2], date: "2026-03-16", dateDisplay: "16/03/2026" },
   { label: "Março e abril", months: [3, 4], date: "2026-04-15", dateDisplay: "15/04/2026" },
   { label: "Maio e junho", months: [5, 6], date: "2026-05-15", dateDisplay: "15/05/2026" },
   { label: "Julho e agosto", months: [7, 8], date: "2026-06-15", dateDisplay: "15/06/2026" },
   { label: "Setembro e outubro", months: [9, 10], date: "2026-07-15", dateDisplay: "15/07/2026" },
-  { label: "Novembro e dezembro", months: [11, 12], date: "2026-08-15", dateDisplay: "15/08/2026" }
+  { label: "Novembro e dezembro", months: [11, 12], date: "2026-08-17", dateDisplay: "17/08/2026" }
 ];
 
 var SALARIO_MINIMO_2026 = 1621.00;
