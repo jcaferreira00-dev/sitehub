@@ -58,7 +58,7 @@ function calcular(){
 
     if(!uniao2anos || !contrib18){
       duracaoTexto = 'limitada a 4 meses';
-      alerta = ' Atenção: como a união tinha menos de 2 anos e/ou o(a) falecido(a) tinha menos de 18 contribuições, a regra padrão limita a pensão do cônjuge/companheiro(a) a 4 meses — SALVO se o óbito decorreu de acidente ou de doença posterior ao casamento/união, casos em que essa limitação não se aplica. Vale muito a pena confirmar isso com um advogado.';
+      alerta = ' Atenção: como a união tinha menos de 2 anos e/ou o(a) falecido(a) tinha menos de 18 contribuições, a regra padrão limita a pensão do cônjuge/companheiro(a) a 4 meses — SALVO se o óbito decorreu de acidente de qualquer natureza ou de doença profissional ou do trabalho, casos em que essa limitação não se aplica. Vale muito a pena confirmar isso com um advogado.';
     } else if(idade > 0){
       duracaoTexto = duracaoPorIdade(idade);
     } else {

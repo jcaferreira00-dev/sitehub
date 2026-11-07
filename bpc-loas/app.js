@@ -29,14 +29,14 @@ function calcular(){
     document.getElementById('r-value').textContent = 'R$ 1.621,00/mês';
     document.getElementById('r-note').textContent = 'Renda por pessoa: R$ ' + perCapita.toFixed(2).replace('.', ',') + ', dentro do limite de R$ 405,25. Confirme pelo Meu INSS.';
   } else if(perCapita <= 810.50){
-    box.className = 'result show status-good';
-    document.getElementById('r-label').textContent = 'Pode ter direito pela flexibilização';
+    box.className = 'result show status-warn';
+    document.getElementById('r-label').textContent = 'Acima do limite do INSS';
     document.getElementById('r-value').textContent = 'R$ 1.621,00/mês';
-    document.getElementById('r-note').textContent = 'Renda por pessoa: R$ ' + perCapita.toFixed(2).replace('.', ',') + '. Acima de R$ 405,25, mas dentro de R$ 810,50 — precisa comprovar vulnerabilidade adicional (gastos com saúde, remédios etc) na hora do pedido.';
+    document.getElementById('r-note').textContent = 'Renda por pessoa: R$ ' + perCapita.toFixed(2).replace('.', ',') + '. Acima do limite de R$ 405,25, o INSS tende a negar. Ainda dá para buscar o benefício na Justiça provando vulnerabilidade (gastos com saúde, remédios etc). A lei prevê ampliar o limite até R$ 810,50, mas isso ainda não foi regulamentado.';
   } else {
     box.className = 'result show status-warn';
     document.getElementById('r-label').textContent = 'Fora da linha de elegibilidade';
     document.getElementById('r-value').textContent = 'R$ ' + perCapita.toFixed(2).replace('.', ',') + ' por pessoa';
-    document.getElementById('r-note').textContent = 'O limite é de R$ 810,50 por pessoa mesmo com flexibilização. Com esses números, não se enquadra hoje.';
+    document.getElementById('r-note').textContent = 'Bem acima do limite de R$ 405,25 por pessoa e também acima de R$ 810,50 (1/2 salário mínimo). Com esses números, não se enquadra hoje.';
   }
 }
